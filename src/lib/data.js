@@ -1,0 +1,15 @@
+import overallScoresRaw from "../../data/overall_scores.json"
+
+// EPP Code sometimes arrives as a float (e.g. 6011.0) because of NaNs
+// introduced during joins upstream in the source workbook.
+function coerceEppCode(value) {
+  if (value === null || value === undefined) return null
+  return Math.trunc(Number(value))
+}
+
+export function getOverallScores() {
+  return overallScoresRaw.map((row) => ({
+    ...row,
+    "EPP Code": coerceEppCode(row["EPP Code"]),
+  }))
+}
