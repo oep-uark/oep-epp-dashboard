@@ -3,9 +3,15 @@ import { MissingValue } from "@/components/MissingValue"
 
 // Performance level is an ordinal scale (Exceeds > Meets > Approaching > Below),
 // so this reads as a small marker + label rather than a generic status pill.
-export function PerformanceBadge({ level }) {
+// `variant="plain"` drops the color dot for tables that already encode the
+// level visually elsewhere (e.g. a score bar in an adjacent column).
+export function PerformanceBadge({ level, variant = "dot" }) {
   if (!level || !PERFORMANCE_LEVEL_COLORS[level]) {
     return <MissingValue />
+  }
+
+  if (variant === "plain") {
+    return <span className="text-sm text-muted-foreground">{level}</span>
   }
 
   const { bg } = PERFORMANCE_LEVEL_COLORS[level]
