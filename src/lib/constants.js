@@ -8,7 +8,8 @@ export const PERFORMANCE_LEVELS = [
 ]
 
 export function performanceLevelFromScore(score) {
-  if (score === null || score === undefined || Number.isNaN(score)) return null
+  if (score === null || score === undefined || typeof score === "string") return null
+  if (Number.isNaN(score)) return null
   if (score >= 2.67) return "Exceeds"
   if (score > 1.67) return "Meets"
   if (score > 0.67) return "Approaching"

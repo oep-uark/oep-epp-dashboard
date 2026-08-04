@@ -1,26 +1,186 @@
-// Criteria groupings for each standard's Summary table, transcribed from
-// the Shiny app's grouped column headers (mod_page_standard.R,
-// mod_page_standard_3.R). The last column in each group is that group's
-// subtotal (e.g. "1.1"), styled distinctly from its raw (a)/(b)/(c) inputs.
-export const STANDARD_SUMMARY_GROUPS = {
+// Indicator names and criteria descriptions transcribed from Josh's state
+// review framework reference (email, 2026-08-04) — these replace the raw
+// "1.1(a)"-style codes with plain language everywhere in the Summary
+// tables. Short labels are our own condensed paraphrases of the full
+// criteria text for column headers; the full sentence is preserved as
+// tooltip content on each criterion column.
+export const STANDARD_SUMMARY_INDICATORS = {
   1: [
-    { label: "Program Plans", columns: ["1.1(a)", "1.1"] },
-    { label: "Recruitment", columns: ["1.2(a)", "1.2(b)", "1.2"] },
-    { label: "Completion", columns: ["1.3(a)", "1.3"] },
+    {
+      number: "1.1",
+      name: "Plans",
+      subtotalKey: "1.1",
+      criteria: [
+        {
+          key: "1.1(a)",
+          shortLabel: "Formal Plans",
+          fullText:
+            "Programs have formal plans to meet the targets described in the state review framework (i.e., Standards 1-3) and show evidence of acting on their plans.",
+        },
+      ],
+    },
+    {
+      number: "1.2",
+      name: "Recruitment",
+      subtotalKey: "1.2",
+      criteria: [
+        {
+          key: "1.2(a)",
+          shortLabel: "Targets",
+          fullText:
+            "Programs meet annual recruitment targets that align with their program size and Arkansas's workforce needs.",
+        },
+        {
+          key: "1.2(b)",
+          shortLabel: "Shortage Areas",
+          fullText:
+            "Programs recruit candidates for Arkansas certification shortage areas in proportion to the need.",
+        },
+      ],
+    },
+    {
+      number: "1.3",
+      name: "Completion",
+      subtotalKey: "1.3",
+      criteria: [
+        {
+          key: "1.3(a)",
+          shortLabel: "Persistence",
+          fullText: "Candidates have high rates of persistence from enrollment to completion.",
+        },
+      ],
+    },
   ],
   2: [
-    { label: "Coursework", columns: ["2.1(a)", "2.1(b)", "2.1(c)", "2.1"] },
-    { label: "Clinical Experiences", columns: ["2.2(a)", "2.2(b)", "2.2(c)", "2.2"] },
-    { label: "Candidate Development", columns: ["2.3(a)", "2.3(b)", "2.3"] },
+    {
+      number: "2.1",
+      name: "Coursework",
+      subtotalKey: "2.1",
+      criteria: [
+        {
+          key: "2.1(a)",
+          shortLabel: "Evidence-Based",
+          fullText: "Candidates receive high-quality program coursework that is evidence-based.",
+        },
+        {
+          key: "2.1(b)",
+          shortLabel: "Supports Development",
+          fullText: "Candidates' coursework supports their development as a teacher.",
+        },
+      ],
+    },
+    {
+      number: "2.2",
+      name: "Clinical Experiences",
+      subtotalKey: "2.2",
+      criteria: [
+        {
+          key: "2.2(a)",
+          shortLabel: "Quality",
+          fullText:
+            "Candidates are provided clinical experiences that support their development as a teacher.",
+        },
+        {
+          key: "2.2(b)",
+          shortLabel: "Internship Effectiveness",
+          fullText:
+            "Candidates across the program are provided with an effective clinical internship.",
+        },
+        {
+          key: "2.2(c)",
+          shortLabel: "K-12 Partnerships",
+          fullText:
+            "Strong partnerships exist between the EPP and K12 schools and districts that facilitate the development of strong candidates.",
+        },
+      ],
+    },
+    {
+      number: "2.3",
+      name: "Development",
+      subtotalKey: "2.3",
+      criteria: [
+        {
+          key: "2.3(a)",
+          shortLabel: "Coursework Success",
+          fullText: "Candidates are successful with their program coursework.",
+        },
+        {
+          key: "2.3(b)",
+          shortLabel: "Internship Success",
+          fullText: "Candidates are successful in their clinical internship.",
+        },
+      ],
+    },
   ],
   3: [
-    { label: "Licensure", columns: ["3.1(a)", "3.1(b)", "3.1(c)", "3.1"] },
-    { label: "Employment", columns: ["3.2(a)", "3.2(b)", "3.2(c)", "3.2"] },
-    { label: "Effectiveness", columns: ["3.3(a)", "3.3(b)", "3.3(c)", "3.3"] },
+    {
+      number: "3.1",
+      name: "Licensure",
+      subtotalKey: "3.1",
+      criteria: [
+        {
+          key: "3.1(a)",
+          shortLabel: "Standard License",
+          fullText: "A high proportion of program candidates obtain a standard license.",
+        },
+        {
+          key: "3.1(b)",
+          shortLabel: "Provisional License",
+          fullText: "A high proportion of alternative route enrollees are provisionally licensed.",
+        },
+        {
+          key: "3.1(c)",
+          shortLabel: "Content Exam",
+          fullText:
+            "A high proportion of traditional program candidates pass the content exam in their area on the first try.",
+        },
+      ],
+    },
+    {
+      number: "3.2",
+      name: "Employment",
+      subtotalKey: "3.2",
+      criteria: [
+        {
+          key: "3.2(a)",
+          shortLabel: "AR Public Schools",
+          fullText: "A high proportion of completers are employed in Arkansas public schools.",
+        },
+        {
+          key: "3.2(b)",
+          shortLabel: "High-Priority Placement",
+          fullText:
+            "A high proportion of completers work in high-priority Arkansas public school districts and subjects.",
+        },
+        {
+          key: "3.2(c)",
+          shortLabel: "Multi-Year Retention",
+          fullText: "Program completers remain in the classroom for multiple years.",
+        },
+      ],
+    },
+    {
+      number: "3.3",
+      name: "Effectiveness",
+      subtotalKey: "3.3",
+      criteria: [
+        {
+          key: "3.3(a)",
+          shortLabel: "Leader-Rated",
+          fullText:
+            "School leaders rate program completers that they hire as effective classroom teachers.",
+        },
+        {
+          key: "3.3(b)",
+          shortLabel: "Completer-Rated",
+          fullText: "Completers feel that their program prepared them well to be a teacher.",
+        },
+        {
+          key: "3.3(c)",
+          shortLabel: "Value-Added Scores",
+          fullText: "A high proportion of program completers have above average value-added scores.",
+        },
+      ],
+    },
   ],
-}
-
-// A group's subtotal column is the one with no (a)/(b)/(c) suffix, e.g. "1.1".
-export function isSubtotalColumn(key) {
-  return /^\d\.\d$/.test(key)
 }
