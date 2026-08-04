@@ -1,17 +1,18 @@
 import { PERFORMANCE_LEVEL_COLORS } from "@/lib/constants"
+import { MissingValue } from "@/components/MissingValue"
 
+// Performance level is an ordinal scale (Exceeds > Meets > Approaching > Below),
+// so this reads as a small marker + label rather than a generic status pill.
 export function PerformanceBadge({ level }) {
   if (!level || !PERFORMANCE_LEVEL_COLORS[level]) {
-    return <span className="text-muted-foreground text-sm">—</span>
+    return <MissingValue />
   }
 
-  const { bg, text } = PERFORMANCE_LEVEL_COLORS[level]
+  const { bg } = PERFORMANCE_LEVEL_COLORS[level]
 
   return (
-    <span
-      className="inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold"
-      style={{ backgroundColor: bg, color: text }}
-    >
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+      <span className="size-2 shrink-0 rounded-full" style={{ backgroundColor: bg }} aria-hidden="true" />
       {level}
     </span>
   )

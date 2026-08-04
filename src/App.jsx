@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { AppSidebar } from "@/components/AppSidebar"
 import { OverviewPage } from "@/components/OverviewPage"
-import { cn } from "@/lib/utils"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview" },
@@ -12,59 +11,46 @@ const NAV_ITEMS = [
 
 function App() {
   const [page, setPage] = useState("overview")
-  const [programType, setProgramType] = useState("Traditional")
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-foreground text-background">
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-8 px-6 py-4">
-          <div>
-            <p className="font-heading text-lg font-semibold">Arkansas EPP State Review Dashboard</p>
+      <header className="border-b border-border bg-background">
+        <div className="mx-auto flex max-w-[1600px] flex-wrap items-start justify-between gap-x-8 gap-y-3 px-6 py-3">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-2">
+            <p className="max-w-2xs font-heading text-base leading-snug font-medium text-foreground">
+              Arkansas Educator Preparation Program State Review Dashboard
+            </p>
+            <Tabs value={page} onValueChange={setPage}>
+              <TabsList variant="line">
+                {NAV_ITEMS.map((item) => (
+                  <TabsTrigger key={item.key} value={item.key} className="after:bg-primary">
+                    {item.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
           </div>
-          <nav className="flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.key}
-                type="button"
-                onClick={() => setPage(item.key)}
-                className={cn(
-                  "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                  page === item.key
-                    ? "bg-primary text-primary-foreground"
-                    : "text-background/80 hover:bg-background/10 hover:text-background"
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
           <a
             href="https://dese.ade.arkansas.gov/Offices/educator-effectiveness/educator-preparation-programs-in-arkansas/arkansas-state-review-of-educator-preparation-programs-epps"
             target="_blank"
             rel="noreferrer"
-            className="text-background/80 hover:text-background shrink-0 text-sm underline-offset-4 hover:underline"
+            className="shrink-0 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >
             EPP State Review Website
           </a>
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-[1600px] flex-1 gap-8 px-6 py-8">
-        <AppSidebar page={page} programType={programType} onProgramTypeChange={setProgramType} />
-        <div className="min-w-0 flex-1">
-          {page === "overview" && (
-            <OverviewPage
-              programType={programType}
-              onNavigateToStandard={(n) => setPage(`standard${n}`)}
-            />
-          )}
-          {page !== "overview" && <ComingSoon page={page} />}
-        </div>
+      <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 pt-6 pb-10">
+        {page === "overview" && (
+          <OverviewPage onNavigateToStandard={(n) => setPage(`standard${n}`)} />
+        )}
+        {page !== "overview" && <ComingSoon page={page} />}
       </main>
 
-      <footer className="border-border bg-secondary border-t">
+      <footer className="border-t border-border">
         <div className="mx-auto max-w-[1600px] px-6 py-6">
-          <p className="text-muted-foreground text-xs leading-relaxed">
+          <p className="text-xs leading-relaxed text-muted-foreground">
             The Arkansas Educator Preparation Program State Review Dashboard is a joint project
             of the Arkansas Department of Education Division of Elementary and Secondary
             Education and the University of Arkansas Department of Education Reform Office for
@@ -84,10 +70,8 @@ const STANDARD_TITLES = {
 
 function ComingSoon({ page }) {
   return (
-    <div className="border-border flex min-h-64 items-center justify-center rounded-lg border border-dashed">
-      <p className="text-muted-foreground text-sm">
-        {STANDARD_TITLES[page]} — coming next.
-      </p>
+    <div className="flex min-h-64 items-center justify-center rounded-lg border border-dashed border-border">
+      <p className="text-sm text-muted-foreground">{STANDARD_TITLES[page]} — coming next.</p>
     </div>
   )
 }

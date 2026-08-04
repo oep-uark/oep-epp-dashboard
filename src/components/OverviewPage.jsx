@@ -1,7 +1,10 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { getOverallScores } from "@/lib/data"
+import { cn } from "@/lib/utils"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
 import { ScoreBar } from "@/components/ScoreBar"
+import { PerformanceLegend } from "@/components/PerformanceLegend"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Table,
   TableBody,
@@ -10,9 +13,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export function OverviewPage({ programType, onNavigateToStandard }) {
+const TOGGLE_ITEM_CLASS =
+  "aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
+
+const HEAD_CLASS = "text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+const HEAD_LINK_CLASS = "uppercase tracking-wide hover:text-primary hover:underline"
+
+export function OverviewPage({ onNavigateToStandard }) {
+  const [programType, setProgramType] = useState("Traditional")
+
   const rows = useMemo(() => {
     const all = getOverallScores()
     return all
@@ -23,39 +33,71 @@ export function OverviewPage({ programType, onNavigateToStandard }) {
   }, [programType])
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>EPP State Review Score Overview</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="font-heading text-xl font-medium text-foreground">
+            EPP State Review Score Overview
+          </h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
+            The Arkansas Educator Preparation Program (EPP) State Review sets a shared vision and
+            bar for high-quality educator preparation to ensure teacher candidates are ready to
+            meet students' needs on day one.
+          </p>
+        </div>
+
+        <ToggleGroup
+          value={[programType]}
+          onValueChange={(value) => value.length && setProgramType(value[0])}
+          spacing={0}
+          variant="outline"
+          aria-label="Program type"
+          className="shrink-0"
+        >
+          <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
+            Traditional
+          </ToggleGroupItem>
+          <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
+            Alternative
+          </ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+
+      <div className="mt-6">
+        <PerformanceLegend />
+      </div>
+
+      <div className="mt-3">
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>Program</TableHead>
-              <TableHead>Overall Performance Level</TableHead>
-              <TableHead>Average Performance Score</TableHead>
-              <TableHead>
+            <TableRow className="hover:bg-transparent">
+              <TableHead className={HEAD_CLASS}>Program</TableHead>
+              <TableHead className={HEAD_CLASS}>Overall Performance Level</TableHead>
+              <TableHead className={cn(HEAD_CLASS, "min-w-56")}>
+                Average Performance Score
+              </TableHead>
+              <TableHead className={HEAD_CLASS}>
                 <button
                   type="button"
-                  className="hover:text-primary hover:underline"
+                  className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(1)}
                 >
                   Standard 1
                 </button>
               </TableHead>
-              <TableHead>
+              <TableHead className={HEAD_CLASS}>
                 <button
                   type="button"
-                  className="hover:text-primary hover:underline"
+                  className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(2)}
                 >
                   Standard 2
                 </button>
               </TableHead>
-              <TableHead>
+              <TableHead className={HEAD_CLASS}>
                 <button
                   type="button"
-                  className="hover:text-primary hover:underline"
+                  className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(3)}
                 >
                   Standard 3
@@ -66,11 +108,13 @@ export function OverviewPage({ programType, onNavigateToStandard }) {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row["Lookup Code"]}>
-                <TableCell className="font-medium whitespace-nowrap">{row["EPP Name"]}</TableCell>
+                <TableCell className="font-medium whitespace-nowrap text-foreground">
+                  {row["EPP Name"]}
+                </TableCell>
                 <TableCell>
                   <PerformanceBadge level={row["Overall Performance Level"]} />
                 </TableCell>
-                <TableCell>
+                <TableCell className="min-w-56">
                   <ScoreBar
                     score={row["Average Performance Score"]}
                     level={row["Overall Performance Level"]}
@@ -89,7 +133,7 @@ export function OverviewPage({ programType, onNavigateToStandard }) {
             ))}
           </TableBody>
         </Table>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

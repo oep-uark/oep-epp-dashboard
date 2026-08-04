@@ -15,22 +15,24 @@ export function performanceLevelFromScore(score) {
   return "Below"
 }
 
-// U of A brand colors standing in for the Shiny app's teal/yellow/red scheme.
+// Trial: literal colors from the Shiny app (not U of A brand hexes) per
+// Roy's request, so Josh's first look isn't a shock relative to the tool
+// he already knows. Revisit once the broader redesign direction is settled.
 export const PERFORMANCE_LEVEL_COLORS = {
   Exceeds: {
-    bg: "#3E94AA", // Springwater
+    bg: "#28A745",
     text: "#FFFFFF",
   },
   Meets: {
-    bg: "#9DC9D5", // Clearsky
-    text: "#0F3842",
+    bg: "#17A2B8",
+    text: "#FFFFFF",
   },
   Approaching: {
-    bg: "#DDBA96", // Buckskin
-    text: "#492D14",
+    bg: "#FFC107",
+    text: "#212529",
   },
   Below: {
-    bg: "#9D2235", // Razorback Red
+    bg: "#DC3545",
     text: "#FFFFFF",
   },
 }
