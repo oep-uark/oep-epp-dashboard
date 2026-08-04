@@ -1,4 +1,8 @@
-import { PERFORMANCE_LEVELS, PERFORMANCE_LEVEL_COLORS } from "@/lib/constants"
+import {
+  PERFORMANCE_LEVELS,
+  PERFORMANCE_LEVEL_COLORS,
+  PERFORMANCE_LEVEL_GRADES,
+} from "@/lib/constants"
 
 function legendRange(label) {
   switch (label) {
@@ -15,7 +19,7 @@ function legendRange(label) {
   }
 }
 
-export function PerformanceLegend() {
+export function PerformanceLegend({ showGrades = false }) {
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted-foreground">
       {PERFORMANCE_LEVELS.map(({ label }) => (
@@ -25,7 +29,9 @@ export function PerformanceLegend() {
             style={{ backgroundColor: PERFORMANCE_LEVEL_COLORS[label].bg }}
             aria-hidden="true"
           />
-          <span className="font-medium text-foreground">{label}</span>
+          <span className="font-medium text-foreground">
+            {showGrades ? `${PERFORMANCE_LEVEL_GRADES[label]} · ${label}` : label}
+          </span>
           <span>{legendRange(label)}</span>
         </div>
       ))}

@@ -15,6 +15,16 @@ export function performanceLevelFromScore(score) {
   return "Below"
 }
 
+// Letter grades per Roy: A=Exceeds, B=Meets, C=Approaching, D and F
+// collapse into a single "Below" tier so they display as one combined
+// grade rather than splitting the bottom tier further.
+export const PERFORMANCE_LEVEL_GRADES = {
+  Exceeds: "A",
+  Meets: "B",
+  Approaching: "C",
+  Below: "D/F",
+}
+
 // Trial: literal colors from the Shiny app (not U of A brand hexes) per
 // Roy's request, so Josh's first look isn't a shock relative to the tool
 // he already knows. Revisit once the broader redesign direction is settled.

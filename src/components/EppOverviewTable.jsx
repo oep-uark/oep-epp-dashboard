@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react"
 import { getOverallScores } from "@/lib/data"
-import { LetterGradeBadge } from "@/components/LetterGradeBadge"
+import { cn } from "@/lib/utils"
+import { PerformanceBadge } from "@/components/PerformanceBadge"
+import { ScoreBar } from "@/components/ScoreBar"
 import { PerformanceLegend } from "@/components/PerformanceLegend"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
@@ -16,10 +18,9 @@ const TOGGLE_ITEM_CLASS =
   "aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
 
 const HEAD_CLASS = "text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+const HEAD_LINK_CLASS = "uppercase tracking-wide hover:text-primary hover:underline"
 
-const SOR_MISSING_REASON = "Science of Reading data is not yet available."
-
-export function OverviewPage() {
+export function EppOverviewTable({ onNavigateToStandard }) {
   const [programType, setProgramType] = useState("Traditional")
 
   const rows = useMemo(() => {
@@ -35,11 +36,13 @@ export function OverviewPage() {
     <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="font-heading text-xl font-medium text-foreground">Overview</h1>
+          <h1 className="font-heading text-xl font-medium text-foreground">
+            EPP State Review Score Overview
+          </h1>
           <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-            A combined look at each program's EPP State Review and Science of Reading results.
-            See the EPP State Review and Science of Reading tabs for the full breakdown behind
-            each grade.
+            The Arkansas Educator Preparation Program (EPP) State Review sets a shared vision and
+            bar for high-quality educator preparation to ensure teacher candidates are ready to
+            meet students' needs on day one.
           </p>
         </div>
 
@@ -61,7 +64,7 @@ export function OverviewPage() {
       </div>
 
       <div className="mt-6">
-        <PerformanceLegend showGrades />
+        <PerformanceLegend />
       </div>
 
       <div className="mt-3">
@@ -69,9 +72,37 @@ export function OverviewPage() {
           <TableHeader>
             <TableRow className="hover:bg-transparent">
               <TableHead className={HEAD_CLASS}>Program</TableHead>
-              <TableHead className={HEAD_CLASS}>Overall Grade</TableHead>
-              <TableHead className={HEAD_CLASS}>EPP Review Grade</TableHead>
-              <TableHead className={HEAD_CLASS}>Science of Reading Grade</TableHead>
+              <TableHead className={HEAD_CLASS}>Overall Performance Level</TableHead>
+              <TableHead className={cn(HEAD_CLASS, "min-w-56")}>
+                Average Performance Score
+              </TableHead>
+              <TableHead className={HEAD_CLASS}>
+                <button
+                  type="button"
+                  className={HEAD_LINK_CLASS}
+                  onClick={() => onNavigateToStandard(1)}
+                >
+                  Standard 1
+                </button>
+              </TableHead>
+              <TableHead className={HEAD_CLASS}>
+                <button
+                  type="button"
+                  className={HEAD_LINK_CLASS}
+                  onClick={() => onNavigateToStandard(2)}
+                >
+                  Standard 2
+                </button>
+              </TableHead>
+              <TableHead className={HEAD_CLASS}>
+                <button
+                  type="button"
+                  className={HEAD_LINK_CLASS}
+                  onClick={() => onNavigateToStandard(3)}
+                >
+                  Standard 3
+                </button>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -80,17 +111,23 @@ export function OverviewPage() {
                 <TableCell className="font-medium whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                {/* Overall grade combines EPP Review + Science of Reading once Josh
-                    defines that formula — using the Review grade as a placeholder
-                    until then. */}
                 <TableCell>
-                  <LetterGradeBadge level={row["Overall Performance Level"]} />
+                  <PerformanceBadge level={row["Overall Performance Level"]} />
+                </TableCell>
+                <TableCell className="min-w-56">
+                  <ScoreBar
+                    score={row["Average Performance Score"]}
+                    level={row["Overall Performance Level"]}
+                  />
                 </TableCell>
                 <TableCell>
-                  <LetterGradeBadge level={row["Overall Performance Level"]} />
+                  <PerformanceBadge level={row["Standard 1 Performance Level"]} />
                 </TableCell>
                 <TableCell>
-                  <LetterGradeBadge level={null} missingReason={SOR_MISSING_REASON} />
+                  <PerformanceBadge level={row["Standard 2 Performance Level"]} />
+                </TableCell>
+                <TableCell>
+                  <PerformanceBadge level={row["Standard 3 Performance Level"]} />
                 </TableCell>
               </TableRow>
             ))}

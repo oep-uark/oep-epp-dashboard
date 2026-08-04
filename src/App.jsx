@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { OverviewPage } from "@/components/OverviewPage"
+import { EppReviewPage } from "@/components/EppReviewPage"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview" },
-  { key: "standard1", label: "Standard 1" },
-  { key: "standard2", label: "Standard 2" },
-  { key: "standard3", label: "Standard 3" },
+  { key: "epp-review", label: "EPP State Review" },
+  { key: "science-of-reading", label: "Science of Reading" },
 ]
 
 function App() {
@@ -42,10 +42,9 @@ function App() {
       </header>
 
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 pt-6 pb-10">
-        {page === "overview" && (
-          <OverviewPage onNavigateToStandard={(n) => setPage(`standard${n}`)} />
-        )}
-        {page !== "overview" && <ComingSoon page={page} />}
+        {page === "overview" && <OverviewPage />}
+        {page === "epp-review" && <EppReviewPage />}
+        {page === "science-of-reading" && <ComingSoon />}
       </main>
 
       <footer className="border-t border-border">
@@ -62,16 +61,10 @@ function App() {
   )
 }
 
-const STANDARD_TITLES = {
-  standard1: "Standard 1 - Candidate Recruitment and Completion",
-  standard2: "Standard 2 - Preparing Candidates Effectively",
-  standard3: "Standard 3 - Supporting Workforce Needs",
-}
-
-function ComingSoon({ page }) {
+function ComingSoon() {
   return (
     <div className="flex min-h-64 items-center justify-center rounded-lg border border-dashed border-border">
-      <p className="text-sm text-muted-foreground">{STANDARD_TITLES[page]} — coming next.</p>
+      <p className="text-sm text-muted-foreground">Science of Reading dashboard — coming next.</p>
     </div>
   )
 }
