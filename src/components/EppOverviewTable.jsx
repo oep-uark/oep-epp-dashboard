@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
 import { ScoreBar } from "@/components/ScoreBar"
 import { PerformanceLegend } from "@/components/PerformanceLegend"
+import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Table,
@@ -14,11 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const TOGGLE_ITEM_CLASS =
-  "aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
-
-const HEAD_CLASS = "text-xs font-semibold uppercase tracking-wide text-muted-foreground"
-const HEAD_LINK_CLASS = "uppercase tracking-wide hover:text-primary hover:underline"
+const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
 
 export function EppOverviewTable({ onNavigateToStandard }) {
   const [programType, setProgramType] = useState("Traditional")
@@ -51,6 +48,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
           onValueChange={(value) => value.length && setProgramType(value[0])}
           spacing={0}
           variant="outline"
+          size="sm"
           aria-label="Program type"
           className="shrink-0"
         >
@@ -71,12 +69,12 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={HEAD_CLASS}>Program</TableHead>
-              <TableHead className={HEAD_CLASS}>Overall Performance Level</TableHead>
-              <TableHead className={cn(HEAD_CLASS, "min-w-56")}>
+              <TableHead className={TABLE_HEAD_CLASS}>Program</TableHead>
+              <TableHead className={TABLE_HEAD_CLASS}>Overall Performance Level</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "min-w-56")}>
                 Average Performance Score
               </TableHead>
-              <TableHead className={HEAD_CLASS}>
+              <TableHead className={TABLE_HEAD_CLASS}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -85,7 +83,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Standard 1
                 </button>
               </TableHead>
-              <TableHead className={HEAD_CLASS}>
+              <TableHead className={TABLE_HEAD_CLASS}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -94,7 +92,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Standard 2
                 </button>
               </TableHead>
-              <TableHead className={HEAD_CLASS}>
+              <TableHead className={TABLE_HEAD_CLASS}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -107,8 +105,8 @@ export function EppOverviewTable({ onNavigateToStandard }) {
           </TableHeader>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row["Lookup Code"]}>
-                <TableCell className="font-medium whitespace-nowrap text-foreground">
+              <TableRow key={row["Lookup Code"]} className={TABLE_ROW_CLASS}>
+                <TableCell className="py-2.5 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
                 <TableCell>

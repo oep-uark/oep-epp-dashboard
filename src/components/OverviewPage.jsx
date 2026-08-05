@@ -2,6 +2,7 @@ import { useMemo, useState } from "react"
 import { getOverallScores } from "@/lib/data"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
 import { PerformanceLegend } from "@/components/PerformanceLegend"
+import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Table,
@@ -11,11 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-const TOGGLE_ITEM_CLASS =
-  "aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
-
-const HEAD_CLASS = "text-xs font-semibold uppercase tracking-wide text-muted-foreground"
 
 const SOR_MISSING_REASON = "Science of Reading data is not yet available."
 
@@ -48,6 +44,7 @@ export function OverviewPage() {
           onValueChange={(value) => value.length && setProgramType(value[0])}
           spacing={0}
           variant="outline"
+          size="sm"
           aria-label="Program type"
           className="shrink-0"
         >
@@ -68,16 +65,16 @@ export function OverviewPage() {
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={HEAD_CLASS}>Program</TableHead>
-              <TableHead className={HEAD_CLASS}>Overall Grade</TableHead>
-              <TableHead className={HEAD_CLASS}>EPP Review Grade</TableHead>
-              <TableHead className={HEAD_CLASS}>Science of Reading Grade</TableHead>
+              <TableHead className={TABLE_HEAD_CLASS}>Program</TableHead>
+              <TableHead className={TABLE_HEAD_CLASS}>Overall Grade</TableHead>
+              <TableHead className={TABLE_HEAD_CLASS}>EPP Review Grade</TableHead>
+              <TableHead className={TABLE_HEAD_CLASS}>Science of Reading Grade</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row["Lookup Code"]}>
-                <TableCell className="font-medium whitespace-nowrap text-foreground">
+              <TableRow key={row["Lookup Code"]} className={TABLE_ROW_CLASS}>
+                <TableCell className="py-2.5 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
                 {/* Overall grade combines EPP Review + Science of Reading once Josh

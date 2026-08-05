@@ -1,9 +1,7 @@
 import { useState } from "react"
 import { StandardSummaryTable } from "@/components/StandardSummaryTable"
+import { TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-
-const TOGGLE_ITEM_CLASS =
-  "h-6 rounded-[6px] px-2 text-xs aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
 
 const STANDARD_TITLES = {
   1: "Standard 1 - Candidate Recruitment and Completion",
