@@ -22,26 +22,12 @@ import {
 
 const SOR_MISSING_REASON = "No Science of Reading data for this program yet."
 
-// Program column pinned to the same fixed width as the Standard tables'
-// sticky Program column (see PROGRAM_COL_WIDTH in StandardSummaryTable.jsx)
-// so it doesn't balloon to soak up every bit of extra viewport width the
-// way it does under plain auto layout.
-const PROGRAM_COL_CLASS = "w-[340px]"
-
 // Grade columns hold a single small circle each, so left-alignment left them
 // looking stranded — centered top-to-bottom (header label, badge, and
 // missing-value dash all share this) so the three columns read as precise
 // vertical rails. Overall Grade's header gets one step more weight than the
 // other two so it stays visually primary without any shading or divider.
-//
-// Table uses table-fixed so these widths are strictly honored instead of
-// auto layout's content-driven sizing, which sizes each column to its own
-// nowrap header text ("Science of Reading Grade" vs "Overall Grade") and
-// throws off the spacing between badges. Each grade column takes an equal
-// share of whatever's left after Program's fixed width, so the three rails
-// stay evenly spaced at any viewport width instead of clustering to one
-// side.
-const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[calc((100%-340px)/3)] text-center")
+const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[26.6%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function OverviewPage() {
@@ -110,7 +96,7 @@ export function OverviewPage() {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, PROGRAM_COL_CLASS)}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>EPP Review Grade</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Grade</TableHead>

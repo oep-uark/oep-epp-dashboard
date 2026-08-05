@@ -43,13 +43,17 @@ export function EppOverviewTable({ onNavigateToStandard }) {
       />
 
       <div className="mt-6">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={TABLE_HEAD_CLASS}>Program</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Letter Grade</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Overall Performance Level</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal text-center")}>
+                Letter Grade
+              </TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+                Overall Performance Level
+              </TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -58,7 +62,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Standard 1
                 </button>
               </TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -67,7 +71,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Standard 2
                 </button>
               </TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -87,7 +91,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                 <TableCell className="py-0 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                <TableCell className="py-0">
+                <TableCell className="py-0 text-center">
                   <LetterGradeBadge level={row["Overall Performance Level"]} size="sm" />
                 </TableCell>
                 <TableCell className="py-0">

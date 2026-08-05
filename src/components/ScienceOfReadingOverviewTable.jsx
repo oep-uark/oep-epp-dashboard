@@ -49,14 +49,21 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
       />
 
       <div className="mt-6">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={TABLE_HEAD_CLASS}>Program</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Letter Grade</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Overall Performance Level</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal text-center")}>
+                Letter Grade
+              </TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+                Overall Performance Level
+              </TableHead>
               {[1, 2, 3].map((n) => (
-                <TableHead key={n} className={TABLE_HEAD_CLASS}>
+                <TableHead
+                  key={n}
+                  className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}
+                >
                   <button type="button" className={HEAD_LINK_CLASS} onClick={() => onNavigateToArea(n)}>
                     {SCIENCE_OF_READING_AREAS[n].number}
                   </button>
@@ -73,7 +80,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                 <TableCell className="py-0 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                <TableCell className="py-0">
+                <TableCell className="py-0 text-center">
                   <LetterGradeBadge level={scienceOfReadingOverallLevel(row)} size="sm" />
                 </TableCell>
                 <TableCell className="py-0">
