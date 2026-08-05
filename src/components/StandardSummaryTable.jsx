@@ -3,6 +3,7 @@ import { Info } from "lucide-react"
 import { getStandardData } from "@/lib/data"
 import { performanceLevelFromScore } from "@/lib/constants"
 import { STANDARD_SUMMARY_INDICATORS } from "@/lib/standardSummaryConfig"
+import { TABLE_ROW_HEIGHT_CLASS } from "@/lib/tableStyles"
 import { cn } from "@/lib/utils"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -146,19 +147,22 @@ export function StandardSummaryTable({ standardNumber, programType }) {
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <TableRow key={row["Lookup Code"]} className="group border-border/40 hover:bg-muted">
-            <TableCell className={cn("py-2.5", STICKY_CELL_CLASS, PROGRAM_COL_WIDTH)}>
+          <TableRow
+            key={row["Lookup Code"]}
+            className={cn(TABLE_ROW_HEIGHT_CLASS, "group border-border/40 hover:bg-muted")}
+          >
+            <TableCell className={cn("py-0", STICKY_CELL_CLASS, PROGRAM_COL_WIDTH)}>
               <span className="whitespace-nowrap text-foreground">{row["EPP Name"]}</span>
             </TableCell>
             <TableCell
-              className={cn("py-2.5", STICKY_CELL_CLASS, perfLevelStickyClass, PERF_LEVEL_COL_WIDTH, "pr-4")}
+              className={cn("py-0", STICKY_CELL_CLASS, perfLevelStickyClass, PERF_LEVEL_COL_WIDTH, "pr-4")}
             >
               <PerformanceBadge level={row[`Standard ${standardNumber} Performance Level`]} emphasis />
             </TableCell>
             {indicators.flatMap((indicator, i) => [
               <TableCell
                 key={indicator.subtotalKey}
-                className={cn("py-2.5", i > 0 && GROUP_GUTTER_CLASS, OVERALL_MIN_WIDTH)}
+                className={cn("py-0", i > 0 && GROUP_GUTTER_CLASS, OVERALL_MIN_WIDTH)}
               >
                 <PerformanceBadge
                   level={performanceLevelFromScore(row[indicator.subtotalKey])}
@@ -166,7 +170,7 @@ export function StandardSummaryTable({ standardNumber, programType }) {
                 />
               </TableCell>,
               ...indicator.criteria.map((c) => (
-                <TableCell key={c.key} className={cn("py-2.5", CRITERION_MIN_WIDTH)}>
+                <TableCell key={c.key} className={cn("py-0", CRITERION_MIN_WIDTH)}>
                   <PerformanceBadge level={performanceLevelFromScore(row[c.key])} variant="plain" />
                 </TableCell>
               )),
