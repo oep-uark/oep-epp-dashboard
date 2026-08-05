@@ -24,4 +24,6 @@ export const TOGGLE_ITEM_CLASS =
 // different row heights even with matching padding classes. Pair with
 // `py-0` on body TableCells; TableCell's default align-middle centers
 // content in the fixed height.
-export const TABLE_ROW_HEIGHT_CLASS = "h-[43px]"
+// Sized up from 43px to fit the larger grade circles (see
+// LetterGradeBadge) needed for "D/F" to read cleanly at size — per Josh.
+export const TABLE_ROW_HEIGHT_CLASS = "h-[52px]"

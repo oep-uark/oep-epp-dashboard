@@ -24,10 +24,10 @@ const SOR_MISSING_REASON = "No Science of Reading data for this program yet."
 
 // Grade columns hold a single small circle each, so left-alignment left them
 // looking stranded — centered top-to-bottom (header label, badge, and
-// missing-value dash all share this) so the three columns read as precise
+// missing-value dash all share this) so the columns read as precise
 // vertical rails. Overall Grade's header gets one step more weight than the
-// other two so it stays visually primary without any shading or divider.
-const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[26.6%] text-center")
+// others so it stays visually primary without any shading or divider.
+const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[20%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function OverviewPage() {
@@ -68,9 +68,9 @@ export function OverviewPage() {
         <div>
           <h1 className="font-heading text-xl font-medium text-foreground">Overview</h1>
           <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-            A combined look at each program's EPP State Review and Science of Reading results.
-            See the EPP State Review and Science of Reading tabs for the full breakdown behind
-            each grade.
+            This dashboard provides a comprehensive look at educator preparation quality through
+            multiple state reviews. Use the tabs above to see the details behind each review
+            grade.
           </p>
         </div>
 
@@ -98,8 +98,9 @@ export function OverviewPage() {
             <TableRow className="hover:bg-transparent">
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>EPP Review Grade</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Teacher Program Review Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Review Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Leadership Program Review Grade</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -123,6 +124,9 @@ export function OverviewPage() {
                     missingReason={SOR_MISSING_REASON}
                     size="sm"
                   />
+                </TableCell>
+                <TableCell className={GRADE_CELL_CLASS}>
+                  <span className="text-sm text-muted-foreground">-</span>
                 </TableCell>
               </TableRow>
             ))}

@@ -2,12 +2,14 @@ import { useState } from "react"
 import { OverviewPage } from "@/components/OverviewPage"
 import { EppReviewPage } from "@/components/EppReviewPage"
 import { ScienceOfReadingPage } from "@/components/ScienceOfReadingPage"
+import { LeadershipProgramReviewPage } from "@/components/LeadershipProgramReviewPage"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview" },
-  { key: "epp-review", label: "EPP State Review" },
-  { key: "science-of-reading", label: "Science of Reading" },
+  { key: "epp-review", label: "Teacher Program Review" },
+  { key: "science-of-reading", label: "Science of Reading Review" },
+  { key: "leadership-review", label: "Leadership Program Review" },
 ]
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
       <header className="border-b border-border bg-background">
         <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-x-6 px-6 py-2.5">
           <p className="max-w-2xs font-heading text-base leading-tight font-medium text-foreground">
-            Arkansas Educator Preparation Program State Review Dashboard
+            Arkansas Educator Preparation Program Quality Dashboard
           </p>
 
           <Tabs value={page} onValueChange={setPage}>
@@ -50,6 +52,7 @@ function App() {
         {page === "overview" && <OverviewPage />}
         {page === "epp-review" && <EppReviewPage />}
         {page === "science-of-reading" && <ScienceOfReadingPage />}
+        {page === "leadership-review" && <LeadershipProgramReviewPage />}
       </main>
 
       <footer className="border-t border-border">
