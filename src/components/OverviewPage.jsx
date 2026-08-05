@@ -1,8 +1,15 @@
 import { useMemo, useState } from "react"
-import { getOverallScores } from "@/lib/data"
+import { getOverallScores, getScienceOfReadingData } from "@/lib/data"
+import { averagePerformanceLevels } from "@/lib/constants"
+import { scienceOfReadingOverallLevel } from "@/lib/scienceOfReadingConfig"
+import { cn } from "@/lib/utils"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
-import { PerformanceLegend } from "@/components/PerformanceLegend"
-import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
+import {
+  TABLE_HEAD_CLASS,
+  TABLE_ROW_CLASS,
+  TABLE_ROW_HEIGHT_CLASS,
+  TOGGLE_ITEM_CLASS,
+} from "@/lib/tableStyles"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Table,
@@ -13,15 +20,57 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const SOR_MISSING_REASON = "Science of Reading data is not yet available."
+const SOR_MISSING_REASON = "No Science of Reading data for this program yet."
+
+// Program column pinned to the same fixed width as the Standard tables'
+// sticky Program column (see PROGRAM_COL_WIDTH in StandardSummaryTable.jsx)
+// so it doesn't balloon to soak up every bit of extra viewport width the
+// way it does under plain auto layout.
+const PROGRAM_COL_CLASS = "w-[340px]"
+
+// Grade columns hold a single small circle each, so left-alignment left them
+// looking stranded — centered top-to-bottom (header label, badge, and
+// missing-value dash all share this) so the three columns read as precise
+// vertical rails. Overall Grade's header gets one step more weight than the
+// other two so it stays visually primary without any shading or divider.
+//
+// Table uses table-fixed so these widths are strictly honored instead of
+// auto layout's content-driven sizing, which sizes each column to its own
+// nowrap header text ("Science of Reading Grade" vs "Overall Grade") and
+// throws off the spacing between badges. Each grade column takes an equal
+// share of whatever's left after Program's fixed width, so the three rails
+// stay evenly spaced at any viewport width instead of clustering to one
+// side.
+const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[calc((100%-340px)/3)] text-center")
+const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function OverviewPage() {
   const [programType, setProgramType] = useState("Traditional")
 
   const rows = useMemo(() => {
-    const all = getOverallScores()
-    return all
+    const sorByLookupCode = new Map(
+      getScienceOfReadingData().map((row) => [row["Lookup Code"], row])
+    )
+
+    return getOverallScores()
       .filter((row) => row.type === programType)
+      .map((row) => {
+        const sorRow = sorByLookupCode.get(row["Lookup Code"])
+        const eppLevel = row["Overall Performance Level"]
+        const sorLevel = sorRow ? scienceOfReadingOverallLevel(sorRow) : null
+        // Overall grade is a GPA average of the two component grades. If a
+        // program is missing one side (e.g. Alt1247 has no Science of
+        // Reading data; Tra6208/Alt6321/Alt6866 have no EPP Review grade),
+        // fall back to whichever grade it does have rather than showing
+        // missing — per Roy.
+        let overallLevel
+        if (eppLevel && sorLevel) {
+          overallLevel = averagePerformanceLevels(eppLevel, sorLevel)
+        } else {
+          overallLevel = eppLevel ?? sorLevel
+        }
+        return { ...row, sorLevel, overallLevel }
+      })
       .sort((a, b) =>
         (a["EPP Name"] ?? "").toLowerCase().localeCompare((b["EPP Name"] ?? "").toLowerCase())
       )
@@ -58,36 +107,36 @@ export function OverviewPage() {
       </div>
 
       <div className="mt-6">
-        <PerformanceLegend showGrades />
-      </div>
-
-      <div className="mt-3">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={TABLE_HEAD_CLASS}>Program</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Overall Grade</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>EPP Review Grade</TableHead>
-              <TableHead className={TABLE_HEAD_CLASS}>Science of Reading Grade</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, PROGRAM_COL_CLASS)}>Program</TableHead>
+              <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>EPP Review Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Grade</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row["Lookup Code"]} className={TABLE_ROW_CLASS}>
-                <TableCell className="py-2.5 whitespace-nowrap text-foreground">
+              <TableRow
+                key={row["Lookup Code"]}
+                className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}
+              >
+                <TableCell className="py-0 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                {/* Overall grade combines EPP Review + Science of Reading once Josh
-                    defines that formula — using the Review grade as a placeholder
-                    until then. */}
-                <TableCell>
-                  <LetterGradeBadge level={row["Overall Performance Level"]} />
+                <TableCell className={GRADE_CELL_CLASS}>
+                  <LetterGradeBadge level={row.overallLevel} size="sm" />
                 </TableCell>
-                <TableCell>
-                  <LetterGradeBadge level={row["Overall Performance Level"]} />
+                <TableCell className={GRADE_CELL_CLASS}>
+                  <LetterGradeBadge level={row["Overall Performance Level"]} size="sm" />
                 </TableCell>
-                <TableCell>
-                  <LetterGradeBadge level={null} missingReason={SOR_MISSING_REASON} />
+                <TableCell className={GRADE_CELL_CLASS}>
+                  <LetterGradeBadge
+                    level={row.sorLevel}
+                    missingReason={SOR_MISSING_REASON}
+                    size="sm"
+                  />
                 </TableCell>
               </TableRow>
             ))}

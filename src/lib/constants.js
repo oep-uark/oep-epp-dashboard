@@ -26,6 +26,26 @@ export const PERFORMANCE_LEVEL_GRADES = {
   Below: "D/F",
 }
 
+// Each tier's representative point on the same 0-3 scale
+// performanceLevelFromScore already thresholds against, so a "GPA average"
+// of two letter grades is just averaging these and re-running the result
+// through that same function - one set of thresholds, not a second scale
+// invented for grades. Confirmed with Roy: A (Exceeds/3) + B (Meets/2)
+// averages to 2.5, which lands back in "Meets"/B.
+const PERFORMANCE_LEVEL_POINTS = {
+  Exceeds: 3,
+  Meets: 2,
+  Approaching: 1,
+  Below: 0,
+}
+
+export function averagePerformanceLevels(levelA, levelB) {
+  if (PERFORMANCE_LEVEL_POINTS[levelA] === undefined) return null
+  if (PERFORMANCE_LEVEL_POINTS[levelB] === undefined) return null
+  const avg = (PERFORMANCE_LEVEL_POINTS[levelA] + PERFORMANCE_LEVEL_POINTS[levelB]) / 2
+  return performanceLevelFromScore(avg)
+}
+
 // Trial: literal colors from the Shiny app (not U of A brand hexes) per
 // Roy's request, so Josh's first look isn't a shock relative to the tool
 // he already knows. Revisit once the broader redesign direction is settled.

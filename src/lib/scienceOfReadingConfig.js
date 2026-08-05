@@ -1,9 +1,26 @@
+import { performanceLevelFromScore } from "@/lib/constants"
+
 // The raw sheet abbreviates program type ("Tra"/"Alt") where the rest of
 // the app spells it out ("Traditional"/"Alternative") - this maps the
 // PageIntro toggle's value to what's actually in science_of_reading.json.
 export const PROGRAM_TYPE_ABBR = {
   Traditional: "Tra",
   Alternative: "Alt",
+}
+
+// The sheet has no single field that already blends all three review areas, so
+// the overall grade is the average of Review Area 1/2/3 (already rescaled to
+// 0-3 in science_of_reading.json), run through the same thresholds as
+// everything else - confirmed with Roy against a worked example (Southern
+// Arkansas University: RA1 4, RA2 3, RA3 3 on the raw 1-4 scale -> avg 3.33 ->
+// "Meets"/B).
+export function scienceOfReadingOverallLevel(row) {
+  const scores = [row["REVIEW AREA 1"], row["REVIEW AREA 2"], row["REVIEW AREA 3"]].filter(
+    (v) => v !== null && v !== undefined
+  )
+  if (scores.length === 0) return null
+  const avg = scores.reduce((sum, v) => sum + v, 0) / scores.length
+  return performanceLevelFromScore(avg)
 }
 
 // Review area names and short column labels are our own condensed

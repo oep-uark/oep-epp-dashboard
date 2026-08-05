@@ -10,7 +10,15 @@ import { cn } from "@/lib/utils"
 // stay round without dictating row height itself.
 const SIZE_CLASSES = {
   default: "size-8 text-sm",
-  sm: "size-6 text-[10px] leading-none tracking-tight",
+  sm: "size-6 text-xs leading-none tracking-tight",
+}
+
+// "D/F" is the only multi-character grade — at the single-letter sizes
+// above it doesn't fit the circle cleanly, so it drops a step smaller and
+// tightens tracking further rather than changing the circle's shape.
+const COMPOUND_GRADE_CLASSES = {
+  default: "text-[11px] tracking-tighter",
+  sm: "text-[8px] tracking-tighter",
 }
 
 export function LetterGradeBadge({ level, missingReason, size = "default" }) {
@@ -19,17 +27,20 @@ export function LetterGradeBadge({ level, missingReason, size = "default" }) {
   }
 
   const { bg, text } = PERFORMANCE_LEVEL_COLORS[level]
+  const grade = PERFORMANCE_LEVEL_GRADES[level]
+  const isCompoundGrade = grade.length > 1
 
   return (
     <span
       className={cn(
         "inline-flex items-center justify-center rounded-full font-semibold",
-        SIZE_CLASSES[size]
+        SIZE_CLASSES[size],
+        isCompoundGrade && COMPOUND_GRADE_CLASSES[size]
       )}
       style={{ backgroundColor: bg, color: text }}
       title={level}
     >
-      {PERFORMANCE_LEVEL_GRADES[level]}
+      {grade}
     </span>
   )
 }

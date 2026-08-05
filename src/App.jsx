@@ -42,7 +42,7 @@ function App() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 pt-6 pb-10">
+      <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 py-6">
         {page === "overview" && <OverviewPage />}
         {page === "epp-review" && <EppReviewPage />}
         {page === "science-of-reading" && <ScienceOfReadingPage />}
