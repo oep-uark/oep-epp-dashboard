@@ -1,0 +1,39 @@
+import { TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+
+// Shared page-intro block for the EPP Review Overview and each Standard
+// page: serif title, sans-serif description, Traditional/Alternative
+// control pinned to the top of the block (not centered against the full
+// title+description height).
+export function PageIntro({ title, description, programType, onProgramTypeChange }) {
+  return (
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <h1 className="font-heading text-xl font-medium text-foreground">{title}</h1>
+        {/* Fixed to exactly 2 lines (min-h floors it, line-clamp caps it) so the
+            block is the same height on every page regardless of description
+            length — otherwise content below jumps as you switch standards. */}
+        <p className="mt-1.5 line-clamp-2 min-h-10 max-w-3xl text-sm text-muted-foreground">
+          {description}
+        </p>
+      </div>
+
+      <ToggleGroup
+        value={[programType]}
+        onValueChange={(value) => value.length && onProgramTypeChange(value[0])}
+        spacing={0}
+        variant="outline"
+        size="sm"
+        aria-label="Program type"
+        className="shrink-0"
+      >
+        <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
+          Traditional
+        </ToggleGroupItem>
+        <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
+          Alternative
+        </ToggleGroupItem>
+      </ToggleGroup>
+    </div>
+  )
+}

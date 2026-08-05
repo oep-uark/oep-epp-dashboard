@@ -1,7 +1,6 @@
 import { useState } from "react"
+import { PageIntro } from "@/components/PageIntro"
 import { StandardSummaryTable } from "@/components/StandardSummaryTable"
-import { TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 const STANDARD_TITLES = {
   1: "Standard 1 - Candidate Recruitment and Completion",
@@ -9,33 +8,26 @@ const STANDARD_TITLES = {
   3: "Standard 3 - Supporting Workforce Needs",
 }
 
+// Verbatim from the Shiny app's sidebar copy (R/fct_custom_sidebar.R).
+const STANDARD_DESCRIPTIONS = {
+  1: "For Standard 1, EPPs are graded on their formal plans to meet EPP State Review targets and their candidate recruitment and retention.",
+  2: "For Standard 2, EPPs are graded via a site visit on their program's coursework, clinical experiences, and candidate development.",
+  3: "For Standard 3, EPPs are graded on their completers' licensure, employment, and effectiveness.",
+}
+
 export function StandardPage({ standardNumber }) {
   const [programType, setProgramType] = useState("Traditional")
 
   return (
     <div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-lg font-semibold text-foreground">{STANDARD_TITLES[standardNumber]}</h1>
+      <PageIntro
+        title={STANDARD_TITLES[standardNumber]}
+        description={STANDARD_DESCRIPTIONS[standardNumber]}
+        programType={programType}
+        onProgramTypeChange={setProgramType}
+      />
 
-        <ToggleGroup
-          value={[programType]}
-          onValueChange={(value) => value.length && setProgramType(value[0])}
-          spacing={0}
-          variant="outline"
-          size="sm"
-          aria-label="Program type"
-          className="shrink-0"
-        >
-          <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
-            Traditional
-          </ToggleGroupItem>
-          <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
-            Alternative
-          </ToggleGroupItem>
-        </ToggleGroup>
-      </div>
-
-      <div className="mt-1.5">
+      <div className="mt-6">
         <StandardSummaryTable standardNumber={standardNumber} programType={programType} />
       </div>
     </div>

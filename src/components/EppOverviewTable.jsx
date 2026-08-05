@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react"
 import { getOverallScores } from "@/lib/data"
 import { cn } from "@/lib/utils"
+import { PageIntro } from "@/components/PageIntro"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
 import { ScoreBar } from "@/components/ScoreBar"
 import { PerformanceLegend } from "@/components/PerformanceLegend"
-import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS } from "@/lib/tableStyles"
 import {
   Table,
   TableBody,
@@ -16,6 +16,11 @@ import {
 } from "@/components/ui/table"
 
 const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
+
+const DESCRIPTION =
+  "The Arkansas Educator Preparation Program (EPP) State Review sets a shared vision and " +
+  "bar for high-quality educator preparation to ensure teacher candidates are ready to " +
+  "meet students' needs on day one."
 
 export function EppOverviewTable({ onNavigateToStandard }) {
   const [programType, setProgramType] = useState("Traditional")
@@ -31,35 +36,12 @@ export function EppOverviewTable({ onNavigateToStandard }) {
 
   return (
     <div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h1 className="font-heading text-xl font-medium text-foreground">
-            EPP State Review Score Overview
-          </h1>
-          <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-            The Arkansas Educator Preparation Program (EPP) State Review sets a shared vision and
-            bar for high-quality educator preparation to ensure teacher candidates are ready to
-            meet students' needs on day one.
-          </p>
-        </div>
-
-        <ToggleGroup
-          value={[programType]}
-          onValueChange={(value) => value.length && setProgramType(value[0])}
-          spacing={0}
-          variant="outline"
-          size="sm"
-          aria-label="Program type"
-          className="shrink-0"
-        >
-          <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
-            Traditional
-          </ToggleGroupItem>
-          <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
-            Alternative
-          </ToggleGroupItem>
-        </ToggleGroup>
-      </div>
+      <PageIntro
+        title="EPP State Review Score Overview"
+        description={DESCRIPTION}
+        programType={programType}
+        onProgramTypeChange={setProgramType}
+      />
 
       <div className="mt-6">
         <PerformanceLegend />
