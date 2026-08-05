@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { OverviewPage } from "@/components/OverviewPage"
 import { EppReviewPage } from "@/components/EppReviewPage"
+import { ScienceOfReadingPage } from "@/components/ScienceOfReadingPage"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
@@ -44,7 +45,7 @@ function App() {
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 pt-6 pb-10">
         {page === "overview" && <OverviewPage />}
         {page === "epp-review" && <EppReviewPage />}
-        {page === "science-of-reading" && <ComingSoon />}
+        {page === "science-of-reading" && <ScienceOfReadingPage />}
       </main>
 
       <footer className="border-t border-border">
@@ -57,14 +58,6 @@ function App() {
           </p>
         </div>
       </footer>
-    </div>
-  )
-}
-
-function ComingSoon() {
-  return (
-    <div className="flex min-h-64 items-center justify-center rounded-lg border border-dashed border-border">
-      <p className="text-sm text-muted-foreground">Science of Reading dashboard — coming next.</p>
     </div>
   )
 }
