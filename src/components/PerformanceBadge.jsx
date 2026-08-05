@@ -13,12 +13,15 @@ export function PerformanceBadge({ level, variant = "dot", emphasis = false }) {
     return <MissingValue />
   }
 
-  const weightClass = emphasis ? "font-semibold" : "font-medium"
-
   if (variant === "plain") {
-    return <span className={cn("text-sm text-muted-foreground", weightClass)}>{level}</span>
+    return (
+      <span className={cn("text-sm text-foreground", emphasis ? "font-semibold" : "font-normal")}>
+        {level}
+      </span>
+    )
   }
 
+  const weightClass = emphasis ? "font-semibold" : "font-medium"
   const { bg } = PERFORMANCE_LEVEL_COLORS[level]
 
   return (

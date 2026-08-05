@@ -3,7 +3,7 @@ import { StandardSummaryTable } from "@/components/StandardSummaryTable"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 const TOGGLE_ITEM_CLASS =
-  "aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
+  "h-6 rounded-[6px] px-2 text-xs aria-pressed:bg-foreground aria-pressed:text-background aria-pressed:font-semibold"
 
 const STANDARD_TITLES = {
   1: "Standard 1 - Candidate Recruitment and Completion",
@@ -37,7 +37,7 @@ export function StandardPage({ standardNumber }) {
         </ToggleGroup>
       </div>
 
-      <div className="mt-3">
+      <div className="mt-1.5">
         <StandardSummaryTable standardNumber={standardNumber} programType={programType} />
       </div>
     </div>

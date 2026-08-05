@@ -16,12 +16,12 @@ export function EppReviewPage() {
   return (
     <div>
       <Tabs value={view} onValueChange={setView}>
-        <TabsList variant="line" className="h-auto gap-3 p-0">
+        <TabsList variant="line" className="h-auto gap-2.5 p-0">
           {VIEW_ITEMS.map((item) => (
             <TabsTrigger
               key={item.key}
               value={item.key}
-              className="h-auto px-0 pb-1 text-[11px] font-medium tracking-wide text-muted-foreground uppercase after:hidden data-active:font-semibold data-active:text-foreground"
+              className="h-auto px-0 pb-1 text-[11px] font-normal text-muted-foreground after:hidden data-active:font-medium data-active:text-foreground"
             >
               {item.label}
             </TabsTrigger>

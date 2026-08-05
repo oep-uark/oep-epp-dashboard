@@ -127,12 +127,18 @@ export const STANDARD_SUMMARY_INDICATORS = {
           key: "3.1(b)",
           shortLabel: "Provisional License",
           fullText: "A high proportion of alternative route enrollees are provisionally licensed.",
+          // Null for every Traditional row in the data — the criterion only
+          // applies to alternative-route candidates.
+          applicableTypes: ["Alternative"],
         },
         {
           key: "3.1(c)",
           shortLabel: "Content Exam",
           fullText:
             "A high proportion of traditional program candidates pass the content exam in their area on the first try.",
+          // Null for every Alternative row in the data — the criterion only
+          // applies to traditional program candidates.
+          applicableTypes: ["Traditional"],
         },
       ],
     },
