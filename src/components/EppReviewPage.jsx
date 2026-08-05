@@ -16,12 +16,12 @@ export function EppReviewPage() {
   return (
     <div>
       <Tabs value={view} onValueChange={setView}>
-        <TabsList variant="line" className="h-auto gap-2.5 p-0">
+        <TabsList variant="line" className="h-auto gap-5 p-0">
           {VIEW_ITEMS.map((item) => (
             <TabsTrigger
               key={item.key}
               value={item.key}
-              className="h-auto px-0 pb-1 text-[11px] font-normal text-muted-foreground after:hidden data-active:font-medium data-active:text-foreground"
+              className="h-auto px-0 text-[13px] font-medium text-muted-foreground after:hidden data-active:font-semibold data-active:text-foreground"
             >
               {item.label}
             </TabsTrigger>
@@ -29,7 +29,7 @@ export function EppReviewPage() {
         </TabsList>
       </Tabs>
 
-      <div className="mt-4">
+      <div className="mt-3">
         {view === "overview" && (
           <EppOverviewTable onNavigateToStandard={(n) => setView(`standard${n}`)} />
         )}
