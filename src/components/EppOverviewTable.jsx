@@ -45,14 +45,14 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal text-center")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
                 Letter Grade
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
                 Overall Performance Level
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -61,7 +61,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Recruitment & Completion
                 </button>
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -70,7 +70,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Preparing Candidates Effectively
                 </button>
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}

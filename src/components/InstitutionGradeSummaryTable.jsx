@@ -14,7 +14,7 @@ import {
 // One row per institution — Traditional and Alternative no longer split
 // into separate rows/toggle here, so Overall is the institution's single
 // letter grade (average of its Traditional and Alternative results).
-const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[20%] text-center")
+const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[21%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function InstitutionGradeSummaryTable({ title, description, rows }) {
@@ -26,7 +26,7 @@ export function InstitutionGradeSummaryTable({ title, description, rows }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[40%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[37%]")}>Program</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>
                 Overall Letter Grade
               </TableHead>

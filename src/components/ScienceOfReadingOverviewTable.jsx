@@ -58,17 +58,17 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal text-center")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
                 Letter Grade
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
                 Overall Performance Level
               </TableHead>
               {[1, 2, 3].map((n) => (
                 <TableHead
                   key={n}
-                  className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}
+                  className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}
                 >
                   <button type="button" className={HEAD_LINK_CLASS} onClick={() => onNavigateToArea(n)}>
                     {AREA_HEAD_LABELS[n]}

@@ -26,7 +26,7 @@ const GROUP_ROW_CLASS = "h-6 align-bottom"
 // border-collapse algorithm was silently dropping a border-b here;
 // box-shadow isn't part of that model, so it always paints.
 const GROUP_LABEL_CLASS =
-  "block pb-1 text-left text-[11px] font-medium text-foreground/70 shadow-[inset_0_-1px_0_0_color-mix(in_srgb,var(--color-border)_87%,transparent)]"
+  "block pb-1 text-left text-xs font-medium text-foreground/70 shadow-[inset_0_-1px_0_0_color-mix(in_srgb,var(--color-border)_87%,transparent)]"
 // Row 2: the primary functional header — Program, Performance Level, and
 // each group's "Overall" + criteria columns.
 const LEAF_HEAD_CLASS =
@@ -47,8 +47,8 @@ const STICKY_CELL_CLASS = "sticky left-0 z-10 bg-background transition-colors gr
 // narrower or wider depending on how many total columns a given standard
 // needed to fit, which made both these columns (and where the criteria
 // matrix starts) inconsistent from one Standard page to the next.
-const PROGRAM_COL_WIDTH = "w-[340px] min-w-[340px] max-w-[340px]"
-const PROGRAM_COL_OFFSET = "left-[340px]"
+const PROGRAM_COL_WIDTH = "w-[310px] min-w-[310px] max-w-[310px]"
+const PROGRAM_COL_OFFSET = "left-[310px]"
 // Wide enough for "Approaching" without wrapping, with some breathing room.
 const PERF_LEVEL_COL_WIDTH = "w-44 min-w-44 max-w-44"
 // Marks the start of a new numbered group through whitespace alone —

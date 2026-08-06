@@ -21,7 +21,7 @@ const SOR_MISSING_REASON = "No Science of Reading data for this program yet."
 // missing-value dash all share this) so the columns read as precise
 // vertical rails. Overall Grade's header gets one step more weight than the
 // others so it stays visually primary without any shading or divider.
-const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[20%] text-center")
+const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[20.5%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function OverviewPage() {
@@ -78,7 +78,7 @@ export function OverviewPage() {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Teacher Program Review</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Review</TableHead>
