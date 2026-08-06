@@ -22,6 +22,12 @@ import {
 
 const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
 
+const AREA_HEAD_LABELS = {
+  1: "Science of Reading Overview",
+  2: "Field-Based Experiences",
+  3: "Continuous Improvement",
+}
+
 const DESCRIPTION =
   "Evaluates how EPPs prepare candidates to teach evidence-based reading instruction, " +
   "scored across three review areas."
@@ -42,7 +48,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
   return (
     <div>
       <PageIntro
-        title="Science of Reading Score Overview"
+        title="Science of Reading Review Grade Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -65,7 +71,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                   className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}
                 >
                   <button type="button" className={HEAD_LINK_CLASS} onClick={() => onNavigateToArea(n)}>
-                    {SCIENCE_OF_READING_AREAS[n].number}
+                    {AREA_HEAD_LABELS[n]}
                   </button>
                 </TableHead>
               ))}

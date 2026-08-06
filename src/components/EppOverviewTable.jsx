@@ -17,9 +17,8 @@ import {
 const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
 
 const DESCRIPTION =
-  "The Arkansas Educator Preparation Program (EPP) State Review sets a shared vision and " +
-  "bar for high-quality educator preparation to ensure teacher candidates are ready to " +
-  "meet students' needs on day one."
+  "The Teacher Program Review sets a shared vision and bar for high-quality educator " +
+  "preparation to ensure teacher candidates are ready to meet students' needs on day one."
 
 export function EppOverviewTable({ onNavigateToStandard }) {
   const [programType, setProgramType] = useState("Traditional")
@@ -36,7 +35,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
   return (
     <div>
       <PageIntro
-        title="EPP State Review Score Overview"
+        title="Teacher Program Review Grade Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -59,7 +58,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(1)}
                 >
-                  Standard 1
+                  Recruitment & Completion
                 </button>
               </TableHead>
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
@@ -68,7 +67,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(2)}
                 >
-                  Standard 2
+                  Preparing Candidates Effectively
                 </button>
               </TableHead>
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
@@ -77,7 +76,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   className={HEAD_LINK_CLASS}
                   onClick={() => onNavigateToStandard(3)}
                 >
-                  Standard 3
+                  Supporting Workforce Needs
                 </button>
               </TableHead>
             </TableRow>

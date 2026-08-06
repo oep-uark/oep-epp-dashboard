@@ -6,7 +6,7 @@ import { LeadershipProgramReviewPage } from "@/components/LeadershipProgramRevie
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
-  { key: "overview", label: "Overview" },
+  { key: "overview", label: "Grade Summary" },
   { key: "epp-review", label: "Teacher Program Review" },
   { key: "science-of-reading", label: "Science of Reading Review" },
   { key: "leadership-review", label: "Leadership Program Review" },
@@ -18,8 +18,8 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-x-6 px-6 py-2.5">
-          <p className="max-w-2xs font-heading text-base leading-tight font-medium text-foreground">
+        <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-x-6 px-6 py-2.5">
+          <p className="max-w-2xs shrink-0 font-heading text-base leading-tight font-medium text-foreground">
             Arkansas Educator Preparation Program Quality Dashboard
           </p>
 
@@ -36,15 +36,6 @@ function App() {
               ))}
             </TabsList>
           </Tabs>
-
-          <a
-            href="https://dese.ade.arkansas.gov/Offices/educator-effectiveness/educator-preparation-programs-in-arkansas/arkansas-state-review-of-educator-preparation-programs-epps"
-            target="_blank"
-            rel="noreferrer"
-            className="shrink-0 justify-self-end rounded-sm text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            EPP State Review Website
-          </a>
         </div>
       </header>
 
