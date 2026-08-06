@@ -26,13 +26,13 @@ export const STANDARD_SUMMARY_INDICATORS = {
       criteria: [
         {
           key: "1.2(a)",
-          shortLabel: "Targets",
+          shortLabel: "Enrollment",
           fullText:
             "Programs meet annual recruitment targets that align with their program size and Arkansas's workforce needs.",
         },
         {
           key: "1.2(b)",
-          shortLabel: "Shortage Areas",
+          shortLabel: "Shortage Areas Enrollment",
           fullText:
             "Programs recruit candidates for Arkansas certification shortage areas in proportion to the need.",
         },
@@ -45,8 +45,9 @@ export const STANDARD_SUMMARY_INDICATORS = {
       criteria: [
         {
           key: "1.3(a)",
-          shortLabel: "Persistence",
-          fullText: "Candidates have high rates of persistence from enrollment to completion.",
+          shortLabel: "Completion Rate",
+          fullText:
+            "Candidates have high rates of persistence from enrollment to completion. Based on the three year program completion rate.",
         },
       ],
     },
@@ -121,7 +122,8 @@ export const STANDARD_SUMMARY_INDICATORS = {
         {
           key: "3.1(a)",
           shortLabel: "Standard License",
-          fullText: "A high proportion of program candidates obtain a standard license.",
+          fullText:
+            "A high proportion of program candidates obtain a standard license within one year of program completion.",
         },
         {
           key: "3.1(b)",
@@ -149,19 +151,21 @@ export const STANDARD_SUMMARY_INDICATORS = {
       criteria: [
         {
           key: "3.2(a)",
-          shortLabel: "AR Public Schools",
-          fullText: "A high proportion of completers are employed in Arkansas public schools.",
+          shortLabel: "AR Teachers",
+          fullText:
+            "A high proportion of completers are employed as teachers within Arkansas public schools within three years of program completion.",
         },
         {
           key: "3.2(b)",
           shortLabel: "High-Priority Placement",
           fullText:
-            "A high proportion of completers work in high-priority Arkansas public school districts and subjects.",
+            "A high proportion of completers work as teachers in high-priority Arkansas public school districts and subjects.",
         },
         {
           key: "3.2(c)",
           shortLabel: "Multi-Year Retention",
-          fullText: "Program completers remain in the classroom for multiple years.",
+          fullText:
+            "Program completers remain in the classroom for multiple years. Measured by years of completer experience during the first three years after program completion.",
         },
       ],
     },
@@ -172,18 +176,17 @@ export const STANDARD_SUMMARY_INDICATORS = {
       criteria: [
         {
           key: "3.3(a)",
-          shortLabel: "Leader-Rated",
-          fullText:
-            "School leaders rate program completers that they hire as effective classroom teachers.",
+          shortLabel: "Leader Rating",
+          fullText: "School leaders rate program completers that they hire as well prepared to teach.",
         },
         {
           key: "3.3(b)",
-          shortLabel: "Completer-Rated",
+          shortLabel: "Completer Rating",
           fullText: "Completers feel that their program prepared them well to be a teacher.",
         },
         {
           key: "3.3(c)",
-          shortLabel: "Value-Added Scores",
+          shortLabel: "Teacher Growth Scores",
           fullText: "A high proportion of program completers have above average value-added scores.",
         },
       ],
