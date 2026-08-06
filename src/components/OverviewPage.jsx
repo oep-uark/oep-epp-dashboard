@@ -67,7 +67,7 @@ export function OverviewPage() {
   return (
     <div>
       <div>
-        <h1 className="font-heading text-xl font-medium text-foreground">Grade Summary</h1>
+        <h1 className="font-heading text-xl font-medium text-foreground">Provider Letter Grades</h1>
         <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
           This dashboard provides a comprehensive look at educator preparation quality through
           multiple state reviews. Use the tabs above to see the details behind each review grade.
@@ -78,11 +78,11 @@ export function OverviewPage() {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Teacher Program Review</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Teacher Pathways Review</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Review</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Leadership Program Review</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Leadership Pathways Review</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

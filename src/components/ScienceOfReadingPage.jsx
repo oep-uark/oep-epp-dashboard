@@ -5,8 +5,8 @@ import { ScienceOfReadingOverviewTable } from "@/components/ScienceOfReadingOver
 import { ScienceOfReadingAreaPage } from "@/components/ScienceOfReadingAreaPage"
 
 const VIEW_ITEMS = [
-  { key: "institution", label: "Institution Grade Summary" },
-  { key: "overview", label: "Program Grade Summary" },
+  { key: "institution", label: "Provider Grade Summary" },
+  { key: "overview", label: "Pathways Grade Summary" },
   { key: "area1", label: "Science of Reading Overview" },
   { key: "area2", label: "Field-Based Experiences" },
   { key: "area3", label: "Continuous Improvement" },

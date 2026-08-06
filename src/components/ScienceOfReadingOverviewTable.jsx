@@ -48,7 +48,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
   return (
     <div>
       <PageIntro
-        title="Science of Reading Review Grade Summary"
+        title="Science of Reading Pathways Grade Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -58,7 +58,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
                 Letter Grade
               </TableHead>

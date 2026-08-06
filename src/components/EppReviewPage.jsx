@@ -5,8 +5,8 @@ import { EppOverviewTable } from "@/components/EppOverviewTable"
 import { StandardPage } from "@/components/StandardPage"
 
 const VIEW_ITEMS = [
-  { key: "institution", label: "Institution Grade Summary" },
-  { key: "overview", label: "Program Grade Summary" },
+  { key: "institution", label: "Provider Grade Summary" },
+  { key: "overview", label: "Pathways Grade Summary" },
   { key: "standard1", label: "Recruitment & Completion" },
   { key: "standard2", label: "Preparing Candidates Effectively" },
   { key: "standard3", label: "Supporting Workforce Needs" },
@@ -38,7 +38,7 @@ export function EppReviewPage() {
           rel="noreferrer"
           className="shrink-0 rounded-sm text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
-          EPP Program Review Framework
+          Teacher Pathways Review Framework
         </a>
       </div>
 

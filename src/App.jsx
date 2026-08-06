@@ -6,10 +6,10 @@ import { LeadershipProgramReviewPage } from "@/components/LeadershipProgramRevie
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const NAV_ITEMS = [
-  { key: "overview", label: "Grade Summary" },
-  { key: "epp-review", label: "Teacher Program Review" },
+  { key: "overview", label: "Provider Letter Grades" },
+  { key: "epp-review", label: "Teacher Pathways Review" },
   { key: "science-of-reading", label: "Science of Reading Review" },
-  { key: "leadership-review", label: "Leadership Program Review" },
+  { key: "leadership-review", label: "Leadership Pathways Review" },
 ]
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-x-6 px-6 py-2.5">
           <p className="max-w-2xs shrink-0 font-heading text-base leading-tight font-medium text-foreground">
-            Arkansas Educator Preparation Program Quality Dashboard
+            Arkansas Educator Preparation Provider Quality Dashboard
           </p>
 
           <Tabs value={page} onValueChange={setPage}>
@@ -49,7 +49,7 @@ function App() {
       <footer className="border-t border-border">
         <div className="mx-auto max-w-[1600px] px-6 py-6">
           <p className="text-xs leading-relaxed text-muted-foreground">
-            The Arkansas Educator Preparation Program State Review Dashboard is a joint project
+            The Arkansas Educator Preparation Provider Quality Dashboard is a joint project
             of the Arkansas Department of Education Division of Elementary and Secondary
             Education and the University of Arkansas Department of Education Reform Office for
             Education Policy.

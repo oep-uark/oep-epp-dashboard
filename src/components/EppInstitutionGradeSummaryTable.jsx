@@ -5,7 +5,7 @@ import { InstitutionGradeSummaryTable } from "@/components/InstitutionGradeSumma
 
 const DESCRIPTION =
   "One letter grade per institution, averaging its Traditional and Alternative Teacher " +
-  "Program Review results."
+  "Pathways Review results."
 
 export function EppInstitutionGradeSummaryTable() {
   const rows = useMemo(() => {
@@ -29,7 +29,7 @@ export function EppInstitutionGradeSummaryTable() {
 
   return (
     <InstitutionGradeSummaryTable
-      title="Teacher Program Review Institution Grade Summary"
+      title="Teacher Pathways Review Provider Grade Summary"
       description={DESCRIPTION}
       rows={rows}
     />

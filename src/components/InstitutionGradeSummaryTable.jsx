@@ -26,7 +26,7 @@ export function InstitutionGradeSummaryTable({ title, description, rows }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[37%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[37%]")}>Provider</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>
                 Overall Letter Grade
               </TableHead>

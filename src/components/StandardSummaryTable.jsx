@@ -97,7 +97,7 @@ export function StandardSummaryTable({ standardNumber, programType }) {
             rowSpan={2}
             className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, PROGRAM_COL_WIDTH, "align-bottom")}
           >
-            Program
+            Provider
           </TableHead>
           <TableHead
             rowSpan={2}

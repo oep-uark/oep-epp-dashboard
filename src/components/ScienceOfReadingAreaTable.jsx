@@ -43,7 +43,7 @@ export function ScienceOfReadingAreaTable({ areaNumber, programType }) {
       <TableHeader className="sticky top-0 z-10 bg-background">
         <TableRow className="hover:bg-transparent">
           <TableHead className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, PROGRAM_COL_WIDTH)}>
-            Program
+            Provider
           </TableHead>
           <TableHead
             className={cn(

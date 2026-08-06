@@ -2,11 +2,11 @@ export function LeadershipProgramReviewPage() {
   return (
     <div>
       <h1 className="font-heading text-xl font-medium text-foreground">
-        Leadership Program Review
+        Leadership Pathways Review
       </h1>
       <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-        Leadership Program Review results are not yet available. This section will follow the
-        same format as the Teacher Program Review and Science of Reading Review once data is
+        Leadership Pathways Review results are not yet available. This section will follow the
+        same format as the Teacher Pathways Review and Science of Reading Review once data is
         ready.
       </p>
 

@@ -31,7 +31,7 @@ export function ScienceOfReadingInstitutionGradeSummaryTable() {
 
   return (
     <InstitutionGradeSummaryTable
-      title="Science of Reading Review Institution Grade Summary"
+      title="Science of Reading Provider Grade Summary"
       description={DESCRIPTION}
       rows={rows}
     />

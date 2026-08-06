@@ -17,7 +17,7 @@ import {
 const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
 
 const DESCRIPTION =
-  "The Teacher Program Review sets a shared vision and bar for high-quality educator " +
+  "The Teacher Pathways Review sets a shared vision and bar for high-quality educator " +
   "preparation to ensure teacher candidates are ready to meet students' needs on day one."
 
 export function EppOverviewTable({ onNavigateToStandard }) {
@@ -35,7 +35,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
   return (
     <div>
       <PageIntro
-        title="Teacher Program Review Grade Summary"
+        title="Teacher Pathways Review Grade Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -45,7 +45,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Program</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
                 Letter Grade
               </TableHead>
