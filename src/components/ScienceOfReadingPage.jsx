@@ -1,17 +1,19 @@
 import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ScienceOfReadingInstitutionGradeSummaryTable } from "@/components/ScienceOfReadingInstitutionGradeSummaryTable"
 import { ScienceOfReadingOverviewTable } from "@/components/ScienceOfReadingOverviewTable"
 import { ScienceOfReadingAreaPage } from "@/components/ScienceOfReadingAreaPage"
 
 const VIEW_ITEMS = [
-  { key: "overview", label: "Grade Summary" },
+  { key: "institution", label: "Institution Grade Summary" },
+  { key: "overview", label: "Program Grade Summary" },
   { key: "area1", label: "Science of Reading Overview" },
   { key: "area2", label: "Field-Based Experiences" },
   { key: "area3", label: "Continuous Improvement" },
 ]
 
 export function ScienceOfReadingPage() {
-  const [view, setView] = useState("overview")
+  const [view, setView] = useState("institution")
 
   return (
     <div>
@@ -30,6 +32,7 @@ export function ScienceOfReadingPage() {
       </Tabs>
 
       <div className="mt-3">
+        {view === "institution" && <ScienceOfReadingInstitutionGradeSummaryTable />}
         {view === "overview" && (
           <ScienceOfReadingOverviewTable onNavigateToArea={(n) => setView(`area${n}`)} />
         )}

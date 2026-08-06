@@ -39,10 +39,15 @@ const PERFORMANCE_LEVEL_POINTS = {
   Below: 0,
 }
 
-export function averagePerformanceLevels(levelA, levelB) {
-  if (PERFORMANCE_LEVEL_POINTS[levelA] === undefined) return null
-  if (PERFORMANCE_LEVEL_POINTS[levelB] === undefined) return null
-  const avg = (PERFORMANCE_LEVEL_POINTS[levelA] + PERFORMANCE_LEVEL_POINTS[levelB]) / 2
+// Variadic so it also covers the "only one side has data" case (average of
+// a single value is just that value) rather than needing a separate `??`
+// fallback at each call site — nulls/undefined are simply excluded.
+export function averageLevels(...levels) {
+  const points = levels
+    .filter((level) => PERFORMANCE_LEVEL_POINTS[level] !== undefined)
+    .map((level) => PERFORMANCE_LEVEL_POINTS[level])
+  if (points.length === 0) return null
+  const avg = points.reduce((sum, point) => sum + point, 0) / points.length
   return performanceLevelFromScore(avg)
 }
 

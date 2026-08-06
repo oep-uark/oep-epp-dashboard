@@ -1,17 +1,19 @@
 import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { EppInstitutionGradeSummaryTable } from "@/components/EppInstitutionGradeSummaryTable"
 import { EppOverviewTable } from "@/components/EppOverviewTable"
 import { StandardPage } from "@/components/StandardPage"
 
 const VIEW_ITEMS = [
-  { key: "overview", label: "Grade Summary" },
+  { key: "institution", label: "Institution Grade Summary" },
+  { key: "overview", label: "Program Grade Summary" },
   { key: "standard1", label: "Recruitment & Completion" },
   { key: "standard2", label: "Preparing Candidates Effectively" },
   { key: "standard3", label: "Supporting Workforce Needs" },
 ]
 
 export function EppReviewPage() {
-  const [view, setView] = useState("overview")
+  const [view, setView] = useState("institution")
 
   return (
     <div>
@@ -41,6 +43,7 @@ export function EppReviewPage() {
       </div>
 
       <div className="mt-3">
+        {view === "institution" && <EppInstitutionGradeSummaryTable />}
         {view === "overview" && (
           <EppOverviewTable onNavigateToStandard={(n) => setView(`standard${n}`)} />
         )}

@@ -4,7 +4,9 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 // Shared page-intro block for the EPP Review Overview and each Standard
 // page: serif title, sans-serif description, Traditional/Alternative
 // control pinned to the top of the block (not centered against the full
-// title+description height).
+// title+description height). Toggle is omitted when the page doesn't split
+// by program type (e.g. an Institution Grade Summary view) — pass no
+// onProgramTypeChange.
 export function PageIntro({ title, description, programType, onProgramTypeChange }) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -18,22 +20,24 @@ export function PageIntro({ title, description, programType, onProgramTypeChange
         </p>
       </div>
 
-      <ToggleGroup
-        value={[programType]}
-        onValueChange={(value) => value.length && onProgramTypeChange(value[0])}
-        spacing={0}
-        variant="outline"
-        size="sm"
-        aria-label="Program type"
-        className="shrink-0"
-      >
-        <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
-          Traditional
-        </ToggleGroupItem>
-        <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
-          Alternative
-        </ToggleGroupItem>
-      </ToggleGroup>
+      {onProgramTypeChange && (
+        <ToggleGroup
+          value={[programType]}
+          onValueChange={(value) => value.length && onProgramTypeChange(value[0])}
+          spacing={0}
+          variant="outline"
+          size="sm"
+          aria-label="Program type"
+          className="shrink-0"
+        >
+          <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
+            Traditional
+          </ToggleGroupItem>
+          <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
+            Alternative
+          </ToggleGroupItem>
+        </ToggleGroup>
+      )}
     </div>
   )
 }

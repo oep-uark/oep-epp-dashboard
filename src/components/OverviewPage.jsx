@@ -1,16 +1,10 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { getOverallScores, getScienceOfReadingData } from "@/lib/data"
-import { averagePerformanceLevels } from "@/lib/constants"
+import { averageLevels } from "@/lib/constants"
 import { scienceOfReadingOverallLevel } from "@/lib/scienceOfReadingConfig"
 import { cn } from "@/lib/utils"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
-import {
-  TABLE_HEAD_CLASS,
-  TABLE_ROW_CLASS,
-  TABLE_ROW_HEIGHT_CLASS,
-  TOGGLE_ITEM_CLASS,
-} from "@/lib/tableStyles"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TABLE_ROW_HEIGHT_CLASS } from "@/lib/tableStyles"
 import {
   Table,
   TableBody,
@@ -31,65 +25,53 @@ const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[20%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
 export function OverviewPage() {
-  const [programType, setProgramType] = useState("Traditional")
-
   const rows = useMemo(() => {
-    const sorByLookupCode = new Map(
-      getScienceOfReadingData().map((row) => [row["Lookup Code"], row])
-    )
+    // Institution-level: Traditional and Alternative are no longer separate
+    // rows here, so each review's grade is first averaged across a given
+    // institution's two program types (same GPA-average logic as the
+    // Overall column below), then those per-review grades are averaged
+    // again into one Overall Grade per institution.
+    const byEppCode = new Map()
 
-    return getOverallScores()
-      .filter((row) => row.type === programType)
-      .map((row) => {
-        const sorRow = sorByLookupCode.get(row["Lookup Code"])
-        const eppLevel = row["Overall Performance Level"]
-        const sorLevel = sorRow ? scienceOfReadingOverallLevel(sorRow) : null
-        // Overall grade is a GPA average of the two component grades. If a
-        // program is missing one side (e.g. Alt1247 has no Science of
-        // Reading data; Tra6208/Alt6321/Alt6866 have no EPP Review grade),
-        // fall back to whichever grade it does have rather than showing
-        // missing — per Roy.
-        let overallLevel
-        if (eppLevel && sorLevel) {
-          overallLevel = averagePerformanceLevels(eppLevel, sorLevel)
-        } else {
-          overallLevel = eppLevel ?? sorLevel
+    for (const row of getOverallScores()) {
+      const code = row["EPP Code"]
+      const institution = byEppCode.get(code) ?? { key: code, eppName: row["EPP Name"] }
+      if (row.type === "Traditional") institution.eppTraditionalLevel = row["Overall Performance Level"]
+      if (row.type === "Alternative") institution.eppAlternativeLevel = row["Overall Performance Level"]
+      byEppCode.set(code, institution)
+    }
+
+    for (const row of getScienceOfReadingData()) {
+      const code = row["EPP Code"]
+      const institution = byEppCode.get(code) ?? { key: code, eppName: row["EPP Name"] }
+      const level = scienceOfReadingOverallLevel(row)
+      if (row["Program Type"] === "Tra") institution.sorTraditionalLevel = level
+      if (row["Program Type"] === "Alt") institution.sorAlternativeLevel = level
+      byEppCode.set(code, institution)
+    }
+
+    return Array.from(byEppCode.values())
+      .map((institution) => {
+        const eppLevel = averageLevels(institution.eppTraditionalLevel, institution.eppAlternativeLevel)
+        const sorLevel = averageLevels(institution.sorTraditionalLevel, institution.sorAlternativeLevel)
+        return {
+          ...institution,
+          eppLevel,
+          sorLevel,
+          overallLevel: averageLevels(eppLevel, sorLevel),
         }
-        return { ...row, sorLevel, overallLevel }
       })
-      .sort((a, b) =>
-        (a["EPP Name"] ?? "").toLowerCase().localeCompare((b["EPP Name"] ?? "").toLowerCase())
-      )
-  }, [programType])
+      .sort((a, b) => (a.eppName ?? "").toLowerCase().localeCompare((b.eppName ?? "").toLowerCase()))
+  }, [])
 
   return (
     <div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h1 className="font-heading text-xl font-medium text-foreground">Grade Summary</h1>
-          <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-            This dashboard provides a comprehensive look at educator preparation quality through
-            multiple state reviews. Use the tabs above to see the details behind each review
-            grade.
-          </p>
-        </div>
-
-        <ToggleGroup
-          value={[programType]}
-          onValueChange={(value) => value.length && setProgramType(value[0])}
-          spacing={0}
-          variant="outline"
-          size="sm"
-          aria-label="Program type"
-          className="shrink-0"
-        >
-          <ToggleGroupItem value="Traditional" className={TOGGLE_ITEM_CLASS}>
-            Traditional
-          </ToggleGroupItem>
-          <ToggleGroupItem value="Alternative" className={TOGGLE_ITEM_CLASS}>
-            Alternative
-          </ToggleGroupItem>
-        </ToggleGroup>
+      <div>
+        <h1 className="font-heading text-xl font-medium text-foreground">Grade Summary</h1>
+        <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
+          This dashboard provides a comprehensive look at educator preparation quality through
+          multiple state reviews. Use the tabs above to see the details behind each review grade.
+        </p>
       </div>
 
       <div className="mt-6">
@@ -105,18 +87,15 @@ export function OverviewPage() {
           </TableHeader>
           <TableBody>
             {rows.map((row) => (
-              <TableRow
-                key={row["Lookup Code"]}
-                className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}
-              >
+              <TableRow key={row.key} className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}>
                 <TableCell className="py-0 whitespace-nowrap text-foreground">
-                  {row["EPP Name"]}
+                  {row.eppName}
                 </TableCell>
                 <TableCell className={GRADE_CELL_CLASS}>
                   <LetterGradeBadge level={row.overallLevel} size="sm" />
                 </TableCell>
                 <TableCell className={GRADE_CELL_CLASS}>
-                  <LetterGradeBadge level={row["Overall Performance Level"]} size="sm" />
+                  <LetterGradeBadge level={row.eppLevel} size="sm" />
                 </TableCell>
                 <TableCell className={GRADE_CELL_CLASS}>
                   <LetterGradeBadge
