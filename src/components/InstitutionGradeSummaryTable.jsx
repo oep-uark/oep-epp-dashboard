@@ -30,8 +30,8 @@ export function InstitutionGradeSummaryTable({ title, description, rows }) {
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>
                 Overall Letter Grade
               </TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Traditional Letter Grade</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Alternative Letter Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Traditional Pathway Letter Grade</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Alternative Pathway Letter Grade</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

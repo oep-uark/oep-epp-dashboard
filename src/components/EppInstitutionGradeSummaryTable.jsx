@@ -29,7 +29,7 @@ export function EppInstitutionGradeSummaryTable() {
 
   return (
     <InstitutionGradeSummaryTable
-      title="Teacher Pathways Review Provider Grade Summary"
+      title="Teacher Pathways Provider Grade Summary"
       description={DESCRIPTION}
       rows={rows}
     />
