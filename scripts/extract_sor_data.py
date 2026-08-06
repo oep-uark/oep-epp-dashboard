@@ -44,6 +44,12 @@ with open(os.path.join(SCRIPT_DIR, "..", "data", "overall_scores.json")) as f:
 
 TYPE_ABBR = {"Traditional": "Tra", "Alternative": "Alt"}
 
+# Same exclusion as extract_data.py (2026-08-06, per the state): the
+# Alternative program at these two EPPs is dropped from overall_scores.json,
+# so this sheet's own "Alt" row for either one has nothing to resolve
+# against - expected, not a data error (see resolve_identity below).
+EXCLUDED_ALT_NAMES = {"John Brown University", "University of Arkansas-Fayetteville"}
+
 canonical_by_name = {}
 for row in overall_scores:
     canonical_by_name.setdefault(row["EPP Name"], []).append(
@@ -84,6 +90,8 @@ def resolve_identity(raw_name, raw_type):
     if raw_type is not None:
         matches = [o for o in options if o[0] == raw_type]
         if not matches:
+            if raw_type == "Alt" and canonical_name in EXCLUDED_ALT_NAMES:
+                return []
             raise SystemExit(
                 f"'{canonical_name}' has no {raw_type} program in overall_scores.json."
             )

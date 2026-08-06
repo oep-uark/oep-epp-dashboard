@@ -32,6 +32,12 @@ if len(sys.argv) < 2:
 SRC = sys.argv[1]
 OUT_DIR = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
+# Rows the state asked us to drop entirely (2026-08-06): the Alternative
+# program at John Brown University and at University of Arkansas-Fayetteville.
+# Filtered here by Lookup Code, which is stable across every dataset below,
+# rather than hand-edited out of the source workbook's many tabs.
+EXCLUDED_LOOKUP_CODES = {"Alt6321", "Alt6866"}
+
 wb = openpyxl.load_workbook(SRC, data_only=True)
 
 
@@ -271,6 +277,12 @@ def build_standard_3_data():
     return s31, s32, s33
 
 
+def drop_excluded_rows(df):
+    if "Lookup Code" in df.columns:
+        return df[~df["Lookup Code"].isin(EXCLUDED_LOOKUP_CODES)]
+    return df
+
+
 def to_records(df):
     # Replace NaN with None, keep everything else as-is
     return json.loads(df.to_json(orient="records", date_format="iso"))
@@ -300,6 +312,7 @@ if __name__ == "__main__":
         "standard_3_data_3_2": s32,
         "standard_3_data_3_3": s33,
     }
+    datasets = {name: drop_excluded_rows(df) for name, df in datasets.items()}
 
     for name, df in datasets.items():
         with open(f"{out_dir}/{name}.json", "w") as f:
