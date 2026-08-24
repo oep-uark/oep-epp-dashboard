@@ -17,7 +17,10 @@ const RESOURCE_LINKS = [
     label: "EPP State Review Framework",
     href: "https://dese.ade.arkansas.gov/Offices/educator-effectiveness/educator-preparation-programs-in-arkansas/arkansas-state-review-of-educator-preparation-programs-epps",
   },
-  { label: "Science of Reading Rubric", href: null },
+  {
+    label: "Science of Reading Rubric",
+    href: "https://dese.ade.arkansas.gov/Files/1._FINAL_AR_Literacy_Framework_-_1.5.24_EEF.pdf",
+  },
 ]
 
 export function LandingPage({ onNavigate }) {
