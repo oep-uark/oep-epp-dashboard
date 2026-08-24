@@ -4,22 +4,24 @@ import { ScienceOfReadingInstitutionGradeSummaryTable } from "@/components/Scien
 import { ScienceOfReadingOverviewTable } from "@/components/ScienceOfReadingOverviewTable"
 import { ScienceOfReadingAreaPage } from "@/components/ScienceOfReadingAreaPage"
 
+// Provider Grade Summary isn't ready for release - enabled: false hides the
+// sub-tab without deleting the page behind it.
 const VIEW_ITEMS = [
-  { key: "institution", label: "Provider Grade Summary" },
-  { key: "overview", label: "Pathways Grade Summary" },
-  { key: "area1", label: "Science of Reading Overview" },
+  { key: "institution", label: "Provider Grade Summary", enabled: false },
+  { key: "overview", label: "Science of Reading Performance Summary" },
+  { key: "area1", label: "Quality of Literacy Coursework" },
   { key: "area2", label: "Field-Based Experiences" },
   { key: "area3", label: "Continuous Improvement" },
 ]
 
 export function ScienceOfReadingPage() {
-  const [view, setView] = useState("institution")
+  const [view, setView] = useState("overview")
 
   return (
     <div>
       <Tabs value={view} onValueChange={setView}>
         <TabsList variant="line" className="h-auto gap-5 p-0">
-          {VIEW_ITEMS.map((item) => (
+          {VIEW_ITEMS.filter((item) => item.enabled !== false).map((item) => (
             <TabsTrigger
               key={item.key}
               value={item.key}

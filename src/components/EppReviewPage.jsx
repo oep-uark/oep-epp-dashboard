@@ -4,23 +4,25 @@ import { EppInstitutionGradeSummaryTable } from "@/components/EppInstitutionGrad
 import { EppOverviewTable } from "@/components/EppOverviewTable"
 import { StandardPage } from "@/components/StandardPage"
 
+// Provider Grade Summary isn't ready for release - enabled: false hides the
+// sub-tab without deleting the page behind it.
 const VIEW_ITEMS = [
-  { key: "institution", label: "Provider Grade Summary" },
-  { key: "overview", label: "Pathways Grade Summary" },
+  { key: "institution", label: "Provider Grade Summary", enabled: false },
+  { key: "overview", label: "Teacher Pathways Performance Summary" },
   { key: "standard1", label: "Recruitment & Completion" },
   { key: "standard2", label: "Preparing Candidates Effectively" },
   { key: "standard3", label: "Supporting Workforce Needs" },
 ]
 
 export function EppReviewPage() {
-  const [view, setView] = useState("institution")
+  const [view, setView] = useState("overview")
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <Tabs value={view} onValueChange={setView}>
           <TabsList variant="line" className="h-auto gap-5 p-0">
-            {VIEW_ITEMS.map((item) => (
+            {VIEW_ITEMS.filter((item) => item.enabled !== false).map((item) => (
               <TabsTrigger
                 key={item.key}
                 value={item.key}

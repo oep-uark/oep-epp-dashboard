@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react"
 import { getScienceOfReadingData } from "@/lib/data"
-import { performanceLevelFromScore } from "@/lib/constants"
+import { performanceLevelFromScore, SHOW_LETTER_GRADES } from "@/lib/constants"
 import {
   SCIENCE_OF_READING_AREAS,
   PROGRAM_TYPE_ABBR,
@@ -22,8 +22,14 @@ import {
 
 const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
 
+// The state has yet to decide how it wants to aggregate an overall Science
+// of Reading score, so that column is hidden here for now - separate from
+// SHOW_LETTER_GRADES since it's specific to this page, not part of the
+// broader letter-grade rollout.
+const SHOW_OVERALL_PERFORMANCE_LEVEL = false
+
 const AREA_HEAD_LABELS = {
-  1: "Science of Reading Overview",
+  1: "Quality of Literacy Coursework",
   2: "Field-Based Experiences",
   3: "Continuous Improvement",
 }
@@ -48,7 +54,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
   return (
     <div>
       <PageIntro
-        title="Science of Reading Pathways Grade Summary"
+        title="Science of Reading Performance Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -58,17 +64,26 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
-                Letter Grade
-              </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
-                Overall Performance Level
-              </TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[25%]")}>Provider</TableHead>
+              {/* Widths are all 25% for the 4 columns visible with letter
+                  grades and the overall performance level hidden. Turning
+                  either flag back on adds a column, so these widths need
+                  rebalancing too - table-fixed % widths don't resize on
+                  their own. */}
+              {SHOW_LETTER_GRADES && (
+                <TableHead className={cn(TABLE_HEAD_CLASS, "w-[25%] whitespace-normal text-center")}>
+                  Letter Grade
+                </TableHead>
+              )}
+              {SHOW_OVERALL_PERFORMANCE_LEVEL && (
+                <TableHead className={cn(TABLE_HEAD_CLASS, "w-[25%] whitespace-normal")}>
+                  Overall Performance Level
+                </TableHead>
+              )}
               {[1, 2, 3].map((n) => (
                 <TableHead
                   key={n}
-                  className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}
+                  className={cn(TABLE_HEAD_CLASS, "w-[25%] whitespace-normal")}
                 >
                   <button type="button" className={HEAD_LINK_CLASS} onClick={() => onNavigateToArea(n)}>
                     {AREA_HEAD_LABELS[n]}
@@ -86,12 +101,16 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                 <TableCell className="py-0 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                <TableCell className="py-0 text-center">
-                  <LetterGradeBadge level={scienceOfReadingOverallLevel(row)} size="sm" />
-                </TableCell>
-                <TableCell className="py-0">
-                  <PerformanceBadge level={scienceOfReadingOverallLevel(row)} emphasis />
-                </TableCell>
+                {SHOW_LETTER_GRADES && (
+                  <TableCell className="py-0 text-center">
+                    <LetterGradeBadge level={scienceOfReadingOverallLevel(row)} size="sm" />
+                  </TableCell>
+                )}
+                {SHOW_OVERALL_PERFORMANCE_LEVEL && (
+                  <TableCell className="py-0">
+                    <PerformanceBadge level={scienceOfReadingOverallLevel(row)} emphasis />
+                  </TableCell>
+                )}
                 {[1, 2, 3].map((n) => (
                   <TableCell key={n} className="py-0">
                     <PerformanceBadge

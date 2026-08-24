@@ -16,6 +16,13 @@ export function performanceLevelFromScore(score) {
   return "Below"
 }
 
+// Letter grades aren't cleared for release yet - flip this back to true to
+// bring the Letter Grade columns back (EppOverviewTable.jsx and
+// ScienceOfReadingOverviewTable.jsx also need their column width shares
+// restored alongside the column, since those tables use static table-fixed
+// percentage widths rather than computing them).
+export const SHOW_LETTER_GRADES = false
+
 // Letter grades per Roy: A=Exceeds, B=Meets, C=Approaching, D and F
 // collapse into a single "Below" tier so they display as one combined
 // grade rather than splitting the bottom tier further.

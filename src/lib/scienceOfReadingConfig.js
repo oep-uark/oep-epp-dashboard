@@ -29,18 +29,23 @@ export function scienceOfReadingOverallLevel(row) {
 // way there is for the EPP Review standards. Revisit if Josh sends an
 // official framework reference later.
 //
-// Each area's first data column shares its name with the area itself
-// (e.g. "Overview of the Science of Reading" is both Review Area 1's name
-// and a scored column) - that column is the state's own summarizing score
-// for the area, so it drives the area's Performance Level rather than
-// showing up as a regular criterion (`levelKey`, not part of `criteria`).
+// Areas 2 and 3's first data column shares its name with the area itself
+// (e.g. "Field- Based Experiences" is both Review Area 2's name and a scored
+// column) - that column is the state's own summarizing score for the area,
+// so it drives the area's Performance Level rather than showing up as a
+// regular criterion (`levelKey`, not part of `criteria`). Review Area 1 is
+// the exception: the state's real total lives in a separate "REVIEW AREA 1"
+// column, and "Overview of the Science of Reading" is just one score
+// component among the other 8 (Fluency, Vocabulary, etc.) - an earlier
+// version of this file conflated the two.
 export const SCIENCE_OF_READING_AREAS = {
   1: {
     number: "Review Area 1",
-    name: "Overview of the Science of Reading",
+    name: "Quality of Literacy Coursework",
     scoreKey: "REVIEW AREA 1",
-    levelKey: "Overview of the Science of Reading",
+    levelKey: "REVIEW AREA 1",
     criteria: [
+      { key: "Overview of the Science of Reading", shortLabel: "SoR Overview" },
       { key: "Concepts of Print", shortLabel: "Concepts of Print" },
       { key: "Oral Language & Collaborative Communication", shortLabel: "Oral Language" },
       { key: "Phonological & Phonemic Awareness", shortLabel: "Phonological Awareness" },

@@ -1,19 +1,24 @@
 import { useState } from "react"
+import { LandingPage } from "@/components/LandingPage"
 import { OverviewPage } from "@/components/OverviewPage"
 import { EppReviewPage } from "@/components/EppReviewPage"
 import { ScienceOfReadingPage } from "@/components/ScienceOfReadingPage"
 import { LeadershipProgramReviewPage } from "@/components/LeadershipProgramReviewPage"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+// Provider Letter Grades and Leadership Pathways Review aren't ready for
+// release - enabled: false hides the tab from the nav without deleting the
+// page behind it, so bringing either back later is a one-line flip.
 const NAV_ITEMS = [
-  { key: "overview", label: "Provider Letter Grades" },
+  { key: "landing", label: "Overview" },
+  { key: "overview", label: "Provider Letter Grades", enabled: false },
   { key: "epp-review", label: "Teacher Pathways Review" },
   { key: "science-of-reading", label: "Science of Reading Review" },
-  { key: "leadership-review", label: "Leadership Pathways Review" },
+  { key: "leadership-review", label: "Leadership Pathways Review", enabled: false },
 ]
 
 function App() {
-  const [page, setPage] = useState("overview")
+  const [page, setPage] = useState("landing")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -25,7 +30,7 @@ function App() {
 
           <Tabs value={page} onValueChange={setPage}>
             <TabsList variant="line" className="gap-6">
-              {NAV_ITEMS.map((item) => (
+              {NAV_ITEMS.filter((item) => item.enabled !== false).map((item) => (
                 <TabsTrigger
                   key={item.key}
                   value={item.key}
@@ -40,6 +45,7 @@ function App() {
       </header>
 
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 py-6">
+        {page === "landing" && <LandingPage onNavigate={setPage} />}
         {page === "overview" && <OverviewPage />}
         {page === "epp-review" && <EppReviewPage />}
         {page === "science-of-reading" && <ScienceOfReadingPage />}

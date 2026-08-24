@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { getOverallScores } from "@/lib/data"
+import { SHOW_LETTER_GRADES } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { PageIntro } from "@/components/PageIntro"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
@@ -35,7 +36,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
   return (
     <div>
       <PageIntro
-        title="Teacher Pathways Review Grade Summary"
+        title="Teacher Pathways Performance Summary"
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
@@ -45,14 +46,20 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal text-center")}>
-                Letter Grade
-              </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Provider</TableHead>
+              {/* Widths are all 20% for the 5 columns visible with letter
+                  grades hidden. Re-enabling SHOW_LETTER_GRADES adds a 6th
+                  column, so these widths need rebalancing too, not just the
+                  flag - table-fixed % widths don't resize on their own. */}
+              {SHOW_LETTER_GRADES && (
+                <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal text-center")}>
+                  Letter Grade
+                </TableHead>
+              )}
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
                 Overall Performance Level
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -61,7 +68,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Recruitment & Completion
                 </button>
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -70,7 +77,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Preparing Candidates Effectively
                 </button>
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16.4%] whitespace-normal")}>
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
                 <button
                   type="button"
                   className={HEAD_LINK_CLASS}
@@ -90,9 +97,11 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                 <TableCell className="py-0 whitespace-nowrap text-foreground">
                   {row["EPP Name"]}
                 </TableCell>
-                <TableCell className="py-0 text-center">
-                  <LetterGradeBadge level={row["Overall Performance Level"]} size="sm" />
-                </TableCell>
+                {SHOW_LETTER_GRADES && (
+                  <TableCell className="py-0 text-center">
+                    <LetterGradeBadge level={row["Overall Performance Level"]} size="sm" />
+                  </TableCell>
+                )}
                 <TableCell className="py-0">
                   <PerformanceBadge level={row["Overall Performance Level"]} emphasis />
                 </TableCell>
