@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
+const HEAD_LINK_CLASS = "text-left hover:text-primary hover:underline"
 
 // The state has yet to decide how it wants to aggregate an overall Science
 // of Reading score, so that column is hidden here for now - separate from
@@ -93,7 +93,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                 </TableHead>
               ))}
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
-                Report
+                Download Latest Report
               </TableHead>
             </TableRow>
           </TableHeader>

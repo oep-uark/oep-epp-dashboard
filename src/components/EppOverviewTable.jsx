@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const HEAD_LINK_CLASS = "hover:text-primary hover:underline"
+const HEAD_LINK_CLASS = "text-left hover:text-primary hover:underline"
 
 const DESCRIPTION =
   "The Teacher Pathways Review sets a shared vision and bar for high-quality educator " +
@@ -48,9 +48,9 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
-              {/* Widths: 18% Provider, 17% for each of the 4 score columns,
-                  14% Report - sums to 100 with letter grades hidden.
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%]")}>Provider</TableHead>
+              {/* Widths: 16% Provider, 17% for each of the 4 score columns,
+                  16% Report - sums to 100 with letter grades hidden.
                   Re-enabling SHOW_LETTER_GRADES adds a column, so these need
                   rebalancing too, not just the flag - table-fixed % widths
                   don't resize on their own. */}
@@ -89,8 +89,8 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   Supporting Workforce Needs
                 </button>
               </TableHead>
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[14%] whitespace-normal")}>
-                Report
+              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
+                Download Latest Report
               </TableHead>
             </TableRow>
           </TableHeader>
