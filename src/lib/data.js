@@ -1,6 +1,7 @@
 import overallScoresRaw from "../../data/overall_scores.json"
 import standardDataRaw from "../../data/standard_data.json"
 import scienceOfReadingDataRaw from "../../data/science_of_reading.json"
+import reportLinksRaw from "../../data/report_links.json"
 
 // EPP Code sometimes arrives as a float (e.g. 6011.0) because of NaNs
 // introduced during joins upstream in the source workbook.
@@ -28,4 +29,12 @@ export function getScienceOfReadingData() {
     ...row,
     "EPP Code": coerceEppCode(row["EPP Code"]),
   }))
+}
+
+// Report links are hand-maintained in data/report_links.json (not part of
+// the source workbook, so extract_data.py doesn't touch them) and keyed by
+// Lookup Code - Traditional and Alternative each get their own report.
+// Paths are relative to public/.
+export function getReportLink(lookupCode, reportType) {
+  return reportLinksRaw[lookupCode]?.[reportType] ?? null
 }

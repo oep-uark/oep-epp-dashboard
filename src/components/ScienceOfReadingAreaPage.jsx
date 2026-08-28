@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useProgramType } from "@/lib/ProgramTypeContext"
 import { PageIntro } from "@/components/PageIntro"
 import { ScienceOfReadingAreaTable } from "@/components/ScienceOfReadingAreaTable"
 import { SCIENCE_OF_READING_AREAS } from "@/lib/scienceOfReadingConfig"
@@ -15,7 +15,7 @@ const AREA_DESCRIPTIONS = {
 }
 
 export function ScienceOfReadingAreaPage({ areaNumber }) {
-  const [programType, setProgramType] = useState("Traditional")
+  const { programType, setProgramType } = useProgramType()
   const area = SCIENCE_OF_READING_AREAS[areaNumber]
 
   return (

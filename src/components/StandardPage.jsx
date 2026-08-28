@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useProgramType } from "@/lib/ProgramTypeContext"
 import { PageIntro } from "@/components/PageIntro"
 import { StandardSummaryTable } from "@/components/StandardSummaryTable"
 
@@ -16,7 +16,7 @@ const STANDARD_DESCRIPTIONS = {
 }
 
 export function StandardPage({ standardNumber }) {
-  const [programType, setProgramType] = useState("Traditional")
+  const { programType, setProgramType } = useProgramType()
 
   return (
     <div>

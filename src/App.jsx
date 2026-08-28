@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ProgramTypeProvider } from "@/lib/ProgramTypeContext"
 import { LandingPage } from "@/components/LandingPage"
 import { OverviewPage } from "@/components/OverviewPage"
 import { EppReviewPage } from "@/components/EppReviewPage"
@@ -45,11 +46,13 @@ function App() {
       </header>
 
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 py-6">
-        {page === "landing" && <LandingPage onNavigate={setPage} />}
-        {page === "overview" && <OverviewPage />}
-        {page === "epp-review" && <EppReviewPage />}
-        {page === "science-of-reading" && <ScienceOfReadingPage />}
-        {page === "leadership-review" && <LeadershipProgramReviewPage />}
+        <ProgramTypeProvider>
+          {page === "landing" && <LandingPage onNavigate={setPage} />}
+          {page === "overview" && <OverviewPage />}
+          {page === "epp-review" && <EppReviewPage />}
+          {page === "science-of-reading" && <ScienceOfReadingPage />}
+          {page === "leadership-review" && <LeadershipProgramReviewPage />}
+        </ProgramTypeProvider>
       </main>
 
       <footer className="border-t border-border">
