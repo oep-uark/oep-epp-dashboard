@@ -21,7 +21,10 @@ const HEAD_LINK_CLASS = "text-left hover:text-primary hover:underline"
 
 const DESCRIPTION =
   "The Teacher Pathways Review sets a shared vision and bar for high-quality educator " +
-  "preparation to ensure teacher candidates are ready to meet students' needs on day one."
+  "preparation to ensure teacher candidates are ready to meet students' needs on day one. " +
+  "Performance ratings shown on this page are updated annually. Formal reports are issued " +
+  "following a program's comprehensive review and may therefore reflect ratings from an " +
+  "earlier review cycle."
 
 export function EppOverviewTable({ onNavigateToStandard }) {
   const { programType, setProgramType } = useProgramType()
@@ -90,7 +93,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                 </button>
               </TableHead>
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%] whitespace-normal")}>
-                Download Latest Report
+                Download Last Formal Report
               </TableHead>
             </TableRow>
           </TableHeader>

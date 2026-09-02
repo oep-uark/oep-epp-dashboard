@@ -93,7 +93,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                 </TableHead>
               ))}
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%] whitespace-normal")}>
-                Download Latest Report
+                Download Last Formal Report
               </TableHead>
             </TableRow>
           </TableHeader>
