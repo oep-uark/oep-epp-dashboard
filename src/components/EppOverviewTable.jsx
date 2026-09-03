@@ -45,6 +45,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
+        clampDescription={false}
       />
 
       <div className="mt-6">

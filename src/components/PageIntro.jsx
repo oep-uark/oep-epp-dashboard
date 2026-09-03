@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import { TOGGLE_ITEM_CLASS } from "@/lib/tableStyles"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
@@ -7,15 +8,29 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 // title+description height). Toggle is omitted when the page doesn't split
 // by program type (e.g. an Institution Grade Summary view) — pass no
 // onProgramTypeChange.
-export function PageIntro({ title, description, programType, onProgramTypeChange }) {
+export function PageIntro({
+  title,
+  description,
+  programType,
+  onProgramTypeChange,
+  clampDescription = true,
+}) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
       <div>
         <h1 className="font-heading text-xl font-medium text-foreground">{title}</h1>
         {/* Fixed to exactly 2 lines (min-h floors it, line-clamp caps it) so the
             block is the same height on every page regardless of description
-            length — otherwise content below jumps as you switch standards. */}
-        <p className="mt-1.5 line-clamp-2 min-h-10 max-w-3xl text-sm text-muted-foreground">
+            length — otherwise content below jumps as you switch standards.
+            Pages whose description never changes in place (it's not swapped
+            via a standard/area toggle) don't need that guard and can pass
+            clampDescription={false} for a full, unclamped description. */}
+        <p
+          className={cn(
+            "mt-1.5 max-w-3xl text-sm text-muted-foreground",
+            clampDescription && "line-clamp-2 min-h-10"
+          )}
+        >
           {description}
         </p>
       </div>
