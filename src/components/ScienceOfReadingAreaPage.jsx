@@ -25,6 +25,7 @@ export function ScienceOfReadingAreaPage({ areaNumber }) {
         description={AREA_DESCRIPTIONS[areaNumber]}
         programType={programType}
         onProgramTypeChange={setProgramType}
+        showDashLegend
       />
 
       <div className="mt-6">

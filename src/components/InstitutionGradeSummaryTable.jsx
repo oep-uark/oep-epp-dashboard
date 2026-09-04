@@ -17,10 +17,10 @@ import {
 const GRADE_HEAD_CLASS = cn(TABLE_HEAD_CLASS, "w-[21%] text-center")
 const GRADE_CELL_CLASS = "py-0 text-center"
 
-export function InstitutionGradeSummaryTable({ title, description, rows }) {
+export function InstitutionGradeSummaryTable({ title, description, rows, showDashLegend = false }) {
   return (
     <div>
-      <PageIntro title={title} description={description} />
+      <PageIntro title={title} description={description} showDashLegend={showDashLegend} />
 
       <div className="mt-6">
         <Table className="table-fixed">

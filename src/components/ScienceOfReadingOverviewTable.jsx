@@ -60,6 +60,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
+        showDashLegend
       />
 
       <div className="mt-6">

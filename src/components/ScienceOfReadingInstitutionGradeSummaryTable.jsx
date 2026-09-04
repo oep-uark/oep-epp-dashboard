@@ -34,6 +34,7 @@ export function ScienceOfReadingInstitutionGradeSummaryTable() {
       title="Science of Reading Provider Grade Summary"
       description={DESCRIPTION}
       rows={rows}
+      showDashLegend
     />
   )
 }

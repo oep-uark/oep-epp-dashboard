@@ -14,6 +14,7 @@ export function PageIntro({
   programType,
   onProgramTypeChange,
   clampDescription = true,
+  showDashLegend = false,
 }) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -33,13 +34,18 @@ export function PageIntro({
         >
           {description}
         </p>
-        {/* Always visible, not folded into the description above - that text is
-            clamped to 2 lines on most pages, and this needs to hold steady
-            regardless of description length. */}
-        <p className="mt-3 max-w-3xl text-xs text-muted-foreground">
-          A dash (—) indicates a review has not yet been completed, or that the provider does not
-          offer a program eligible for review.
-        </p>
+        {/* Science of Reading only for now, per Roy (2026-09-04) - flip
+            showDashLegend on at any other call site to bring it back
+            app-wide. Kept separate from the description above rather than
+            appended to it, since that text is clamped to 2 lines on most
+            pages, and this needs to hold steady regardless of description
+            length. */}
+        {showDashLegend && (
+          <p className="mt-3 max-w-3xl text-xs text-muted-foreground">
+            A dash (—) indicates a review has not yet been completed, or that the provider does
+            not offer a program eligible for review.
+          </p>
+        )}
       </div>
 
       {onProgramTypeChange && (
