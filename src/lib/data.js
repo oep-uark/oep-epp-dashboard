@@ -24,11 +24,22 @@ export function getStandardData() {
   }))
 }
 
+// Henderson State (Tra6272/Alt6272) and UA-Fayetteville (Tra6866) are
+// excluded here rather than in science_of_reading.json itself - both are
+// going through SoR baseline review in November 2026 and shouldn't show
+// scores yet, but the workbook the state sent still has rows for them (all
+// zeroes for Henderson, live-looking numbers for UAF). Per ADE email
+// forwarded by Josh, 2026-09-04. Remove this filter once the state sends an
+// updated workbook reflecting their baseline review.
+const SOR_EXCLUDED_LOOKUP_CODES = ["Tra6272", "Alt6272", "Tra6866"]
+
 export function getScienceOfReadingData() {
-  return scienceOfReadingDataRaw.map((row) => ({
-    ...row,
-    "EPP Code": coerceEppCode(row["EPP Code"]),
-  }))
+  return scienceOfReadingDataRaw
+    .filter((row) => !SOR_EXCLUDED_LOOKUP_CODES.includes(row["Lookup Code"]))
+    .map((row) => ({
+      ...row,
+      "EPP Code": coerceEppCode(row["EPP Code"]),
+    }))
 }
 
 // Report links are hand-maintained in data/report_links.json (not part of
