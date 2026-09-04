@@ -16,7 +16,7 @@
   "Tra6208": { "eppName": "Reach University", "pathwaysReport": "reports/pathways/Reach_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/Reach_SoR_PerfReport_Trad.docx.pdf" },
   "Tra6220": { "eppName": "University of Arkansas-Fort Smith", "pathwaysReport": "reports/pathways/UAFS_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/UAFS_SoR_PerfReport_Trad.docx.pdf" },
   "Tra6267": { "eppName": "Harding University", "pathwaysReport": "reports/pathways/Harding_StateReview_PerfReport_Trad.pdf", "sorReport": "reports/sor/Harding_SoR_PerfReport_Trad.docx.pdf" },
-  "Alt6267": { "eppName": "Harding University", "pathwaysReport": "reports/pathways/Harding_StateReview_PerfReport_Alt.pdf", "sorReport": null },
+  "Alt6267": { "eppName": "Harding University", "pathwaysReport": "reports/pathways/Harding_StateReview_PerfReport_Alt.pdf", "sorReport": "reports/sor/Harding_SoR_PerfReport_Alt.docx.pdf" },
   "Tra6272": { "eppName": "Henderson State University", "pathwaysReport": "reports/pathways/HSU_StateReview_PerfReport_Trad.pdf", "sorReport": null },
   "Alt6272": { "eppName": "Henderson State University", "pathwaysReport": "reports/pathways/HSU_StateReview_PerfReport_Alt.docx.pdf", "sorReport": null },
   "Tra6321": { "eppName": "John Brown University", "pathwaysReport": "reports/pathways/JBU_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/JBU_SoR_PerfReport_Trad.docx.pdf" },
@@ -33,5 +33,5 @@
   "Alt3912": { "eppName": "Arkansas Teacher Corps", "pathwaysReport": "reports/pathways/ATC_StateReview_PerfReport_Alt.docx.pdf", "sorReport": "reports/sor/ATC_SoR_PerfReport_Alt.docx.pdf" },
   "Alt5675": { "eppName": "Teach for America", "pathwaysReport": "reports/pathways/TFA_StateReview_PerfReport_Alt.docx.pdf", "sorReport": "reports/sor/TFA_SoR_PerfReport_Alt.docx.pdf" },
   "Alt6755": { "eppName": "iteach Arkansas", "pathwaysReport": "reports/pathways/iTeach_StateReview_PerfReport_Alt.docx.pdf", "sorReport": null },
-  "Alt7032": { "eppName": "ArPEP/APPEL", "pathwaysReport": "reports/pathways/ArPEP_StateReview_PerfReport_Alt.docx.pdf", "sorReport": null }
+  "Alt7032": { "eppName": "ArPEP/APPEL", "pathwaysReport": "reports/pathways/ArPEP_StateReview_PerfReport_Alt.docx.pdf", "sorReport": "reports/sor/ArPEP_SoR_PerfReport_Alt.docx.pdf" }
 }
