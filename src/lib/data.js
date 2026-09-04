@@ -36,6 +36,13 @@ export function getStandardData() {
 const SOR_BASELINE_PENDING_LOOKUP_CODES = ["Tra6272", "Alt6272", "Tra6866"]
 const SOR_IDENTITY_FIELDS = ["EPP Name", "Lookup Code", "Program Type", "EPP Code"]
 
+// Williams Baptist's Alternative program has no approved pathway requiring
+// SoR review, so unlike the baseline-pending rows above, this row is dropped
+// entirely rather than blanked - same as how the sheet already omits, say,
+// Lyon College's nonexistent Alt program rather than including a blank row
+// for it. Per Jessica (ADE), 2026-09-04. WBU's Traditional row is unaffected.
+const SOR_EXCLUDED_LOOKUP_CODES = ["Alt6658"]
+
 function blankScienceOfReadingScores(row) {
   const blanked = { ...row }
   for (const key of Object.keys(blanked)) {
@@ -45,12 +52,14 @@ function blankScienceOfReadingScores(row) {
 }
 
 export function getScienceOfReadingData() {
-  return scienceOfReadingDataRaw.map((row) => {
-    const withCode = { ...row, "EPP Code": coerceEppCode(row["EPP Code"]) }
-    return SOR_BASELINE_PENDING_LOOKUP_CODES.includes(row["Lookup Code"])
-      ? blankScienceOfReadingScores(withCode)
-      : withCode
-  })
+  return scienceOfReadingDataRaw
+    .filter((row) => !SOR_EXCLUDED_LOOKUP_CODES.includes(row["Lookup Code"]))
+    .map((row) => {
+      const withCode = { ...row, "EPP Code": coerceEppCode(row["EPP Code"]) }
+      return SOR_BASELINE_PENDING_LOOKUP_CODES.includes(row["Lookup Code"])
+        ? blankScienceOfReadingScores(withCode)
+        : withCode
+    })
 }
 
 // Report links are hand-maintained in data/report_links.json (not part of

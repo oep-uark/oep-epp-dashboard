@@ -25,7 +25,7 @@
   "Tra6549": { "eppName": "Ouachita Baptist University", "pathwaysReport": "reports/pathways/OBU_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/OBU_SoR_PerfReport_Trad.docx.pdf" },
   "Tra6578": { "eppName": "Philander Smith College", "pathwaysReport": "reports/pathways/PSU_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/PSU_SoR_PerfReport_Trad.docx.pdf" },
   "Tra6658": { "eppName": "Williams Baptist University", "pathwaysReport": "reports/pathways/WBU_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/WBU_SoR_PerfReport_Trad.docx.pdf" },
-  "Alt6658": { "eppName": "Williams Baptist University", "pathwaysReport": "reports/pathways/WBU_StateReview_PerfReport_Alt.docx.pdf", "sorReport": "reports/sor/WBU_SoR_PerfReport_Alt.docx.pdf" },
+  "Alt6658": { "eppName": "Williams Baptist University", "pathwaysReport": "reports/pathways/WBU_StateReview_PerfReport_Alt.docx.pdf", "sorReport": null },
   "Tra6661": { "eppName": "Southern Arkansas University", "pathwaysReport": "reports/pathways/SAU_StateReview_PerfReport_Trad.docx.pdf", "sorReport": "reports/sor/SAU_SoR_PerfReport_Trad.docx.pdf" },
   "Alt6661": { "eppName": "Southern Arkansas University", "pathwaysReport": "reports/pathways/SAU_StateReview_PerfReport_Alt.docx.pdf", "sorReport": "reports/sor/SAU_SoR_PerfReport_Alt.docx.pdf" },
   "Tra6866": { "eppName": "University of Arkansas-Fayetteville", "pathwaysReport": "reports/pathways/UAF_StateReview_PerfReport_Trad.docx.pdf", "sorReport": null },

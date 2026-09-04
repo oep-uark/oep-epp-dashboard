@@ -33,6 +33,13 @@ export function PageIntro({
         >
           {description}
         </p>
+        {/* Always visible, not folded into the description above - that text is
+            clamped to 2 lines on most pages, and this needs to hold steady
+            regardless of description length. */}
+        <p className="mt-3 max-w-3xl text-xs text-muted-foreground">
+          A dash (—) indicates a review has not yet been completed, or that the provider does not
+          offer a program eligible for review.
+        </p>
       </div>
 
       {onProgramTypeChange && (
