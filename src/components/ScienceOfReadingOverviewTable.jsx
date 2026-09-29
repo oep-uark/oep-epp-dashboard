@@ -37,8 +37,11 @@ const AREA_HEAD_LABELS = {
 }
 
 const DESCRIPTION =
-  "Evaluates how EPPs prepare candidates to teach evidence-based reading instruction, " +
-  "scored across three review areas."
+  "The Science of Reading Review provides a transparent view of how educator preparation " +
+  "programs equip future teachers with the knowledge and skills needed to deliver " +
+  "evidence-based reading instruction. The performance ratings shown on this page reflect " +
+  "findings from the initial review and may not capture improvements made since the on-site " +
+  "visit."
 
 export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
   const { programType, setProgramType } = useProgramType()
@@ -60,6 +63,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
         description={DESCRIPTION}
         programType={programType}
         onProgramTypeChange={setProgramType}
+        clampDescription={false}
         showDashLegend
       />
 
