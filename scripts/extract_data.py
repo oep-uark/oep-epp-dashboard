@@ -242,6 +242,10 @@ def build_standard_2_data():
     df = pd.DataFrame(rows[1:], columns=header)
     # drop fully-empty trailing columns (blank spacer columns with no header and no data)
     df = df.dropna(axis=1, how="all")
+    # drop the calc_* helper columns (criterion subscores recomputed from the
+    # raw M-measures for the Standard 2 indicator-level rollup) - internal to
+    # the workbook's formula chain, not meant for display
+    df = df[[c for c in df.columns if not str(c).strip().lower().startswith("calc_")]]
     return df
 
 

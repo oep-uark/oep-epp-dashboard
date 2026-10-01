@@ -68,6 +68,11 @@ export const STANDARD_SUMMARY_INDICATORS = {
           shortLabel: "Supports Development",
           fullText: "Candidates' coursework supports their development as a teacher.",
         },
+        {
+          key: "2.1(c)",
+          shortLabel: "Instructor Quality",
+          fullText: "Candidates are provided with knowledgeable and effective course instructors.",
+        },
       ],
     },
     {

@@ -107,7 +107,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                   key={row["Lookup Code"]}
                   className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}
                 >
-                  <TableCell className="py-0 whitespace-nowrap text-foreground">
+                  <TableCell className="py-0 whitespace-normal text-foreground">
                     {row["EPP Name"]}
                   </TableCell>
                   {SHOW_LETTER_GRADES && (
