@@ -31,8 +31,14 @@ const GROUP_LABEL_CLASS =
 // each group's "Overall" + criteria columns.
 const LEAF_HEAD_CLASS =
   "h-8 border-b border-border pb-1.5 text-sm font-semibold text-foreground align-bottom whitespace-nowrap"
-const OVERALL_MIN_WIDTH = "min-w-[96px]"
-const CRITERION_MIN_WIDTH = "min-w-[84px]"
+// Pinned w-/min-w-/max-w- for the same reason as PROGRAM_COL_WIDTH below -
+// min-w- alone left Chrome and Safari free to distribute leftover table
+// width across these columns differently, which showed up as the group
+// label's underline (sized to 100% of its colSpan'd header cell) landing at
+// a different point in each browser instead of stopping cleanly at the
+// group boundary.
+const OVERALL_MIN_WIDTH = "w-[96px] min-w-[96px] max-w-[96px]"
+const CRITERION_MIN_WIDTH = "w-[84px] min-w-[84px] max-w-[84px]"
 const STICKY_HEAD_CLASS = "sticky left-0 z-20 bg-background"
 // Sticky cells carry their own opaque background so scrolled content can't
 // show through underneath them — group-hover swaps it to the same solid
@@ -92,7 +98,19 @@ export function StandardSummaryTable({ standardNumber, programType }) {
       onScroll={(e) => setScrolled(e.currentTarget.scrollLeft > 4)}
     >
       <TableHeader className="sticky top-0 z-10 bg-background">
-        <TableRow className="hover:bg-transparent">
+        {/* !border-b-0 (forced important): two separate things apply
+            border-b to this row - TableRow's own default class, and
+            TableHeader's "[&_tr]:border-b" descendant selector on every tr
+            inside it. That selector outranks a plain class on the row
+            itself (descendant-selector specificity beats a single class),
+            so a plain border-b-0 here silently loses and does nothing -
+            needs !important to actually win. Row 2's own border-b
+            (LEAF_HEAD_CLASS) is the real intended header-bottom line;
+            this row shouldn't have one at all - Chrome renders this row's
+            as a continuous line straight through the group gutters, Safari
+            drops it (same mixed-rowSpan ambiguity GROUP_LABEL_CLASS's
+            comment below already flags, just the opposite browser). */}
+        <TableRow className="!border-b-0 hover:bg-transparent">
           <TableHead
             rowSpan={2}
             className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, PROGRAM_COL_WIDTH, "align-bottom")}
