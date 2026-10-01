@@ -31,14 +31,8 @@ const GROUP_LABEL_CLASS =
 // each group's "Overall" + criteria columns.
 const LEAF_HEAD_CLASS =
   "h-8 border-b border-border pb-1.5 text-sm font-semibold text-foreground align-bottom whitespace-nowrap"
-// Pinned w-/min-w-/max-w- for the same reason as PROGRAM_COL_WIDTH below -
-// min-w- alone left Chrome and Safari free to distribute leftover table
-// width across these columns differently, which showed up as the group
-// label's underline (sized to 100% of its colSpan'd header cell) landing at
-// a different point in each browser instead of stopping cleanly at the
-// group boundary.
-const OVERALL_MIN_WIDTH = "w-[96px] min-w-[96px] max-w-[96px]"
-const CRITERION_MIN_WIDTH = "w-[84px] min-w-[84px] max-w-[84px]"
+const OVERALL_MIN_WIDTH = "min-w-[96px]"
+const CRITERION_MIN_WIDTH = "min-w-[84px]"
 const STICKY_HEAD_CLASS = "sticky left-0 z-20 bg-background"
 // Sticky cells carry their own opaque background so scrolled content can't
 // show through underneath them — group-hover swaps it to the same solid
