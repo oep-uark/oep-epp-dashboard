@@ -25,11 +25,13 @@ export function PageIntro({
             length — otherwise content below jumps as you switch standards.
             Pages whose description never changes in place (it's not swapped
             via a standard/area toggle) don't need that guard and can pass
-            clampDescription={false} for a full, unclamped description. */}
+            clampDescription={false} for a full, unclamped description.
+            Only clamped from md up - on a phone 2 lines is barely a sentence,
+            so the full text shows there instead. */}
         <p
           className={cn(
             "mt-1.5 max-w-3xl text-sm text-muted-foreground",
-            clampDescription && "line-clamp-2 min-h-10"
+            clampDescription && "md:line-clamp-2 md:min-h-10"
           )}
         >
           {description}

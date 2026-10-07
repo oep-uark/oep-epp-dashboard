@@ -7,7 +7,13 @@ import { cn } from "@/lib/utils"
 import { PageIntro } from "@/components/PageIntro"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
-import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TABLE_ROW_HEIGHT_CLASS } from "@/lib/tableStyles"
+import {
+  MOBILE_STICKY_CELL_CLASS,
+  MOBILE_STICKY_HEAD_CLASS,
+  TABLE_HEAD_CLASS,
+  TABLE_ROW_CLASS,
+  TABLE_ROW_HEIGHT_CLASS,
+} from "@/lib/tableStyles"
 import {
   Table,
   TableBody,
@@ -49,10 +55,15 @@ export function EppOverviewTable({ onNavigateToStandard }) {
       />
 
       <div className="mt-6">
-        <Table className="table-fixed">
+        {/* Below md the % widths would squeeze every column to a sliver, so
+            the table gets a floor width and scrolls sideways instead (the
+            Table wrapper is already overflow-x-auto). */}
+        <Table className="table-fixed max-md:min-w-[800px]">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[16%]")}>Provider</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, MOBILE_STICKY_HEAD_CLASS, "w-[16%]")}>
+                Provider
+              </TableHead>
               {/* Widths: 16% Provider, 17% for each of the 4 score columns,
                   16% Report - sums to 100 with letter grades hidden.
                   Re-enabling SHOW_LETTER_GRADES adds a column, so these need
@@ -105,9 +116,9 @@ export function EppOverviewTable({ onNavigateToStandard }) {
               return (
                 <TableRow
                   key={row["Lookup Code"]}
-                  className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}
+                  className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS, "group")}
                 >
-                  <TableCell className="py-0 whitespace-normal text-foreground">
+                  <TableCell className={cn("py-0 whitespace-normal text-foreground", MOBILE_STICKY_CELL_CLASS)}>
                     {row["EPP Name"]}
                   </TableCell>
                   {SHOW_LETTER_GRADES && (

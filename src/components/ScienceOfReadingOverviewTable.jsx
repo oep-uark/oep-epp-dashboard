@@ -12,7 +12,13 @@ import { cn } from "@/lib/utils"
 import { PageIntro } from "@/components/PageIntro"
 import { LetterGradeBadge } from "@/components/LetterGradeBadge"
 import { PerformanceBadge } from "@/components/PerformanceBadge"
-import { TABLE_HEAD_CLASS, TABLE_ROW_CLASS, TABLE_ROW_HEIGHT_CLASS } from "@/lib/tableStyles"
+import {
+  MOBILE_STICKY_CELL_CLASS,
+  MOBILE_STICKY_HEAD_CLASS,
+  TABLE_HEAD_CLASS,
+  TABLE_ROW_CLASS,
+  TABLE_ROW_HEIGHT_CLASS,
+} from "@/lib/tableStyles"
 import {
   Table,
   TableBody,
@@ -68,10 +74,15 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
       />
 
       <div className="mt-6">
-        <Table className="table-fixed">
+        {/* Below md the % widths would squeeze every column to a sliver, so
+            the table gets a floor width and scrolls sideways instead (the
+            Table wrapper is already overflow-x-auto). */}
+        <Table className="table-fixed max-md:min-w-[700px]">
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className={cn(TABLE_HEAD_CLASS, "w-[20%]")}>Provider</TableHead>
+              <TableHead className={cn(TABLE_HEAD_CLASS, MOBILE_STICKY_HEAD_CLASS, "w-[20%]")}>
+                Provider
+              </TableHead>
               {/* Widths are all 20% for the 5 columns visible with letter
                   grades and the overall performance level hidden. Turning
                   either flag back on adds a column, so these widths need
@@ -109,9 +120,9 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
               return (
                 <TableRow
                   key={row["Lookup Code"]}
-                  className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS)}
+                  className={cn(TABLE_ROW_HEIGHT_CLASS, TABLE_ROW_CLASS, "group")}
                 >
-                  <TableCell className="py-0 whitespace-nowrap text-foreground">
+                  <TableCell className={cn("py-0 whitespace-normal text-foreground", MOBILE_STICKY_CELL_CLASS)}>
                     {row["EPP Name"]}
                   </TableCell>
                   {SHOW_LETTER_GRADES && (

@@ -47,10 +47,16 @@ const STICKY_CELL_CLASS = "sticky left-0 z-10 bg-background transition-colors gr
 // narrower or wider depending on how many total columns a given standard
 // needed to fit, which made both these columns (and where the criteria
 // matrix starts) inconsistent from one Standard page to the next.
-const PROGRAM_COL_WIDTH = "w-[310px] min-w-[310px] max-w-[310px]"
-const PROGRAM_COL_OFFSET = "left-[310px]"
+// Below md this column shrinks and wraps - at full width it alone would
+// fill a phone screen and leave nothing visible to scroll.
+const PROGRAM_COL_WIDTH =
+  "w-[150px] min-w-[150px] max-w-[150px] md:w-[310px] md:min-w-[310px] md:max-w-[310px]"
+const PROGRAM_COL_OFFSET = "md:left-[310px]"
 // Wide enough for "Approaching" without wrapping, with some breathing room.
 const PERF_LEVEL_COL_WIDTH = "w-44 min-w-44 max-w-44"
+// Performance Level only pins from md up - on a phone, two pinned columns
+// would take up the whole screen, so only Provider stays put there.
+const PERF_LEVEL_STICKY_CLASS = "max-md:static"
 // Marks the start of a new numbered group through whitespace alone —
 // applied before every group but the first, which already sits right
 // after Performance Level's own padding.
@@ -81,10 +87,19 @@ export function StandardSummaryTable({ standardNumber, programType }) {
   }, [programType])
 
   // Performance Level is the last sticky column before the scrolling
-  // region, so it's the one that gets the boundary shadow once scrolled.
+  // region (from md up), so it's the one that gets the boundary shadow
+  // once scrolled.
   const perfLevelStickyClass = cn(
     PROGRAM_COL_OFFSET,
-    scrolled && "border-r border-border shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
+    PERF_LEVEL_STICKY_CLASS,
+    scrolled && "md:border-r md:border-border md:shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
+  )
+  // Below md Provider is the only pinned column, so it takes the boundary
+  // shadow instead.
+  const programStickyClass = cn(
+    PROGRAM_COL_WIDTH,
+    scrolled &&
+      "max-md:border-r max-md:border-border max-md:shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
   )
 
   return (
@@ -107,7 +122,7 @@ export function StandardSummaryTable({ standardNumber, programType }) {
         <TableRow className="!border-b-0 hover:bg-transparent">
           <TableHead
             rowSpan={2}
-            className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, PROGRAM_COL_WIDTH, "align-bottom")}
+            className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, programStickyClass, "align-bottom")}
           >
             Provider
           </TableHead>
@@ -163,8 +178,8 @@ export function StandardSummaryTable({ standardNumber, programType }) {
             key={row["Lookup Code"]}
             className={cn(TABLE_ROW_HEIGHT_CLASS, "group border-border/40 hover:bg-muted")}
           >
-            <TableCell className={cn("py-0", STICKY_CELL_CLASS, PROGRAM_COL_WIDTH)}>
-              <span className="whitespace-nowrap text-foreground">{row["EPP Name"]}</span>
+            <TableCell className={cn("py-0", STICKY_CELL_CLASS, programStickyClass)}>
+              <span className="whitespace-normal text-foreground md:whitespace-nowrap">{row["EPP Name"]}</span>
             </TableCell>
             <TableCell
               className={cn("py-0", STICKY_CELL_CLASS, perfLevelStickyClass, PERF_LEVEL_COL_WIDTH, "pr-4")}

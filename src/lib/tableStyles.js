@@ -27,3 +27,14 @@ export const TOGGLE_ITEM_CLASS =
 // Sized up from 43px to fit the larger grade circles (see
 // LetterGradeBadge) needed for "D/F" to read cleanly at size — per Josh.
 export const TABLE_ROW_HEIGHT_CLASS = "h-[52px]"
+
+// Phone-only pinned Provider column for the Performance Summary tables.
+// Those tables are table-fixed % widths that fit the screen on desktop, but
+// below md they get a min-width and scroll sideways instead, so the
+// Provider column pins to the left edge to keep each row identifiable.
+// Everything is max-md: so desktop is untouched. The cell needs its own
+// opaque background (and the row needs `group`) for the same reason the
+// Standard tables' sticky cells do - see STICKY_CELL_CLASS there.
+export const MOBILE_STICKY_HEAD_CLASS = "max-md:sticky max-md:left-0 max-md:z-20 max-md:bg-background"
+export const MOBILE_STICKY_CELL_CLASS =
+  "max-md:sticky max-md:left-0 max-md:z-10 max-md:bg-background max-md:transition-colors max-md:group-hover:bg-muted"

@@ -12,9 +12,15 @@ const LEAF_HEAD_CLASS =
 const CRITERION_MIN_WIDTH = "min-w-[140px]"
 const STICKY_HEAD_CLASS = "sticky left-0 z-20 bg-background"
 const STICKY_CELL_CLASS = "sticky left-0 z-10 bg-background transition-colors group-hover:bg-muted"
-const PROGRAM_COL_WIDTH = "w-[340px] min-w-[340px] max-w-[340px]"
-const PROGRAM_COL_OFFSET = "left-[340px]"
+// Below md this column shrinks and wraps - at full width it alone would
+// fill a phone screen and leave nothing visible to scroll.
+const PROGRAM_COL_WIDTH =
+  "w-[150px] min-w-[150px] max-w-[150px] md:w-[340px] md:min-w-[340px] md:max-w-[340px]"
+const PROGRAM_COL_OFFSET = "md:left-[340px]"
 const PERF_LEVEL_COL_WIDTH = "w-44 min-w-44 max-w-44"
+// Performance Level only pins from md up - on a phone, two pinned columns
+// would take up the whole screen, so only Provider stays put there.
+const PERF_LEVEL_STICKY_CLASS = "max-md:static"
 
 // Single-group version of StandardSummaryTable's two-tier header - each
 // Science of Reading review area is its own page, so there's only ever one
@@ -35,14 +41,22 @@ export function ScienceOfReadingAreaTable({ areaNumber, programType }) {
 
   const perfLevelStickyClass = cn(
     PROGRAM_COL_OFFSET,
-    scrolled && "border-r border-border shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
+    PERF_LEVEL_STICKY_CLASS,
+    scrolled && "md:border-r md:border-border md:shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
+  )
+  // Below md Provider is the only pinned column, so it takes the boundary
+  // shadow instead.
+  const programStickyClass = cn(
+    PROGRAM_COL_WIDTH,
+    scrolled &&
+      "max-md:border-r max-md:border-border max-md:shadow-[6px_0_8px_-6px_rgba(0,0,0,0.18)]"
   )
 
   return (
     <Table onScroll={(e) => setScrolled(e.currentTarget.scrollLeft > 4)}>
       <TableHeader className="sticky top-0 z-10 bg-background">
         <TableRow className="hover:bg-transparent">
-          <TableHead className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, PROGRAM_COL_WIDTH)}>
+          <TableHead className={cn(LEAF_HEAD_CLASS, STICKY_HEAD_CLASS, programStickyClass)}>
             Provider
           </TableHead>
           <TableHead
@@ -69,8 +83,8 @@ export function ScienceOfReadingAreaTable({ areaNumber, programType }) {
             key={row["Lookup Code"]}
             className={cn(TABLE_ROW_HEIGHT_CLASS, "group border-border/40 hover:bg-muted")}
           >
-            <TableCell className={cn("py-0", STICKY_CELL_CLASS, PROGRAM_COL_WIDTH)}>
-              <span className="whitespace-nowrap text-foreground">{row["EPP Name"]}</span>
+            <TableCell className={cn("py-0", STICKY_CELL_CLASS, programStickyClass)}>
+              <span className="whitespace-normal text-foreground md:whitespace-nowrap">{row["EPP Name"]}</span>
             </TableCell>
             <TableCell
               className={cn("py-0", STICKY_CELL_CLASS, perfLevelStickyClass, PERF_LEVEL_COL_WIDTH, "pr-4")}
