@@ -65,7 +65,13 @@ export function getScienceOfReadingData() {
 // Report links are hand-maintained in data/report_links.json (not part of
 // the source workbook, so extract_data.py doesn't touch them) and keyed by
 // Lookup Code - Traditional and Alternative each get their own report.
-// Paths are relative to public/.
+// Paths are relative to public/. Each report also has a matching
+// `<reportType>Year` field (e.g. pathwaysReportYear) with the year ADE lists
+// for that report, shown in the link text.
 export function getReportLink(lookupCode, reportType) {
   return reportLinksRaw[lookupCode]?.[reportType] ?? null
+}
+
+export function getReportYear(lookupCode, reportType) {
+  return reportLinksRaw[lookupCode]?.[`${reportType}Year`] ?? null
 }

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { FileText } from "lucide-react"
-import { getScienceOfReadingData, getReportLink } from "@/lib/data"
+import { getScienceOfReadingData, getReportLink, getReportYear } from "@/lib/data"
 import { performanceLevelFromScore, SHOW_LETTER_GRADES } from "@/lib/constants"
 import { useProgramType } from "@/lib/ProgramTypeContext"
 import {
@@ -116,6 +116,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
           <TableBody>
             {rows.map((row) => {
               const reportLink = getReportLink(row["Lookup Code"], "sorReport")
+              const reportYear = getReportYear(row["Lookup Code"], "sorReport")
 
               return (
                 <TableRow
@@ -154,7 +155,7 @@ export function ScienceOfReadingOverviewTable({ onNavigateToArea }) {
                         )}
                       >
                         <FileText className="size-3.5" aria-hidden="true" />
-                        Report
+                        {reportYear ? `${reportYear} Report` : "Report"}
                       </a>
                     ) : (
                       <span className="text-muted-foreground">—</span>

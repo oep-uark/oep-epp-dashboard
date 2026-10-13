@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { FileText } from "lucide-react"
-import { getOverallScores, getReportLink } from "@/lib/data"
+import { getOverallScores, getReportLink, getReportYear } from "@/lib/data"
 import { SHOW_LETTER_GRADES } from "@/lib/constants"
 import { useProgramType } from "@/lib/ProgramTypeContext"
 import { cn } from "@/lib/utils"
@@ -112,6 +112,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
           <TableBody>
             {rows.map((row) => {
               const reportLink = getReportLink(row["Lookup Code"], "pathwaysReport")
+              const reportYear = getReportYear(row["Lookup Code"], "pathwaysReport")
 
               return (
                 <TableRow
@@ -150,7 +151,7 @@ export function EppOverviewTable({ onNavigateToStandard }) {
                         )}
                       >
                         <FileText className="size-3.5" aria-hidden="true" />
-                        Report
+                        {reportYear ? `${reportYear} Report` : "Report"}
                       </a>
                     ) : (
                       <span className="text-muted-foreground">—</span>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 const STANDARDS = [
   "Candidate Recruitment and Completion",
   "Preparing Candidates Effectively",
-  "Meeting Workforce Needs",
+  "Supporting Workforce Needs",
 ]
 
 const RESOURCE_LINKS = [
