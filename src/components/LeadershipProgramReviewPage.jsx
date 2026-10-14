@@ -6,7 +6,7 @@ export function LeadershipProgramReviewPage() {
       </h1>
       <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
         Leadership Pathways Review results are not yet available. This section will follow the
-        same format as the Teacher Pathways Review and Science of Reading Review once data is
+        same format as the Teacher Pathways Review and Science of Reading Audit once data is
         ready.
       </p>
 

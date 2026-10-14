@@ -6,7 +6,7 @@ import { InstitutionGradeSummaryTable } from "@/components/InstitutionGradeSumma
 
 const DESCRIPTION =
   "One letter grade per institution, averaging its Traditional and Alternative Science of " +
-  "Reading Review results."
+  "Reading Audit results."
 
 export function ScienceOfReadingInstitutionGradeSummaryTable() {
   const rows = useMemo(() => {

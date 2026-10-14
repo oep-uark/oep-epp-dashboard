@@ -31,7 +31,7 @@ export function LandingPage({ onNavigate }) {
             (DESE) (Ark. Code Ann. § 6-17-402(b)(1)(A)). To help ensure that these providers
             prepare new educators to meet the needs of Arkansas students, DESE conducts two
             reviews: the Teacher Pathways Review for all approved programs and the Science of
-            Reading Review for programs offering K-6 and special education certification
+            Reading Audit for programs offering K-6 and special education certification
             pathways.
           </p>
           <p>
@@ -59,9 +59,9 @@ export function LandingPage({ onNavigate }) {
             clinical practice, and gathers feedback from program and school partners. State rules
             also require programs to be reviewed annually (6 CAR § 180-304).
           </p>
-          <p className="font-semibold text-foreground">Science of Reading Review</p>
+          <p className="font-semibold text-foreground">Science of Reading Audit</p>
           <p>
-            The Science of Reading Review examines whether applicable programs prepare candidates
+            The Science of Reading Audit examines whether applicable programs prepare candidates
             to teach reading using evidence-based instructional practices. Under the Right to
             Read Act, educator preparation program completers must demonstrate the knowledge and
             skills needed to teach reading consistent with scientific reading instruction, and
@@ -88,7 +88,7 @@ export function LandingPage({ onNavigate }) {
                 <ArrowRight />
               </Button>
               <Button onClick={() => onNavigate("science-of-reading")}>
-                Science of Reading Review
+                Science of Reading Audit
                 <ArrowRight />
               </Button>
             </div>

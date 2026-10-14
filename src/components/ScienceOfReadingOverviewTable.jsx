@@ -43,7 +43,7 @@ const AREA_HEAD_LABELS = {
 }
 
 const DESCRIPTION =
-  "The Science of Reading Review provides a transparent view of how educator preparation " +
+  "The Science of Reading Audit provides a transparent view of how educator preparation " +
   "programs equip future teachers with the knowledge and skills needed to deliver " +
   "evidence-based reading instruction. The performance ratings shown on this page reflect " +
   "findings from the initial review and may not capture improvements made since the on-site " +

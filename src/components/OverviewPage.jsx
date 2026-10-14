@@ -81,7 +81,7 @@ export function OverviewPage() {
               <TableHead className={cn(TABLE_HEAD_CLASS, "w-[18%]")}>Provider</TableHead>
               <TableHead className={cn(GRADE_HEAD_CLASS, "font-bold")}>Overall Grade</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Teacher Pathways Review</TableHead>
-              <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Review</TableHead>
+              <TableHead className={GRADE_HEAD_CLASS}>Science of Reading Audit</TableHead>
               <TableHead className={GRADE_HEAD_CLASS}>Leadership Pathways Review</TableHead>
             </TableRow>
           </TableHeader>

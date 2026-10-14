@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { key: "landing", label: "Overview" },
   { key: "overview", label: "Provider Letter Grades", enabled: false },
   { key: "epp-review", label: "Teacher Pathways Review" },
-  { key: "science-of-reading", label: "Science of Reading Review" },
+  { key: "science-of-reading", label: "Science of Reading Audit" },
   { key: "leadership-review", label: "Leadership Pathways Review", enabled: false },
 ]
 
